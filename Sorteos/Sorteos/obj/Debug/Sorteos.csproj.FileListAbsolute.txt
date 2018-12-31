@@ -1,0 +1,2 @@
+C:\Users\Javier\source\repos\Sorteos\Sorteos\obj\Debug\Sorteos.csprojAssemblyReference.cache
+C:\Users\Javier\source\repos\Sorteos\Sorteos\obj\Debug\Sorteos.csproj.CoreCompileInputs.cache
