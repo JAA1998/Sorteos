@@ -1,4 +1,4 @@
-﻿using Sorteos;
+using Sorteos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +20,15 @@ namespace WCF
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        Respuesta ConsultarSorteoxJuego(int id);
+        Respuesta ConsultarSorteoxJuego(Sorteo s);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        string EliminarSorteo(int id);
+        Respuesta EliminarSorteo(Sorteo s);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        string ModificarSorteo(int id, string nombre, string apellido, int edad);
+        Respuesta ModificarSorteo(Sorteo s);
 
     }
 
