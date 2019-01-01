@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,6 +9,7 @@ namespace Sorteos
     [DataContract]
     public class Sorteo
     {
+
         [DataMember]
         public int ID_SORTEO { get; set; }
 
@@ -16,10 +17,13 @@ namespace Sorteos
         public int ID_JUEGO { get; set; }
 
         [DataMember]
-        public int HORA { get; set; }
+        public int ID_ITEM { get; set; }
 
         [DataMember]
-        public int ESTATUS { get; set; }
+        public string HORA { get; set; }
+
+        [DataMember]
+        public string DIA { get; set; }
 
     }
 }
