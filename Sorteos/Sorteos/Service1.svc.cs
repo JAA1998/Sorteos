@@ -37,11 +37,11 @@ namespace WCF
             return command.ExecuteNonQuery();
         }
 
-        public int ConsultarJuego(int ID_JUEGO)
+        public int ConsultarJuego(int idJuego)
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_JUEGO WHERE ID_JUEGO=" + ID_JUEGO;
+                string query = "SELECT ESTATUS FROM TB_JUEGO WHERE ID_JUEGO=" + idJuego;
                 string result = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -72,11 +72,11 @@ namespace WCF
             }
         }
 
-        public int ConsultarItem(int ID_ITEM)
+        public int ConsultarItem(int idItem)
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_ITEM WHERE ID_ITEM=" + ID_ITEM;
+                string query = "SELECT ESTATUS FROM TB_ITEM WHERE ID_ITEM=" + idItem;
                 string result = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -108,11 +108,11 @@ namespace WCF
             }
         }
 
-        public int ConsultarSorteo(int ID_SORTEO)
+        public int ConsultarSorteo(int idSorteo)
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + ID_SORTEO;
+                string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" +  idSorteo;
                 string result = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -144,11 +144,11 @@ namespace WCF
             }
         }
 
-        public int ConsultarSJ(int ID_SORTEO, int ID_JUEGO)
+        public int ConsultarSJ(int idSorteo, int idJuego)
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + ID_SORTEO + "AND ID_JUEGO=" + ID_JUEGO;
+                string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo + "AND ID_JUEGO=" + idJuego;
                 string result = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -180,11 +180,11 @@ namespace WCF
             }
         }
 
-        public int ConsultarDia(int ID_SORTEO, string DIA)
+        public int ConsultarDia(int idSorteo, string dia)
         {
             try
             {
-                string query = "SELECT A.NOMBRE FROM TB_DIA A JOIN TB_DIA_SORTEO B ON A.ID_DIA=B.ID_DIA WHERE B.ID_SORTEO=" + ID_SORTEO;
+                string query = "SELECT A.NOMBRE FROM TB_DIA A JOIN TB_DIA_SORTEO B ON A.ID_DIA=B.ID_DIA WHERE B.ID_SORTEO=" + idSorteo;
                 string result = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -198,7 +198,7 @@ namespace WCF
                     while (reader.Read())
                     {
                         result = reader.GetString(0);
-                        if (string.Equals(result, DIA))
+                        if (string.Equals(result, dia))
                         {
                             return 0;
                         }
@@ -216,11 +216,11 @@ namespace WCF
             }
         }
 
-        public int ConsultarHora(int ID_JUEGO, string HORA, string DIA)
+        public int ConsultarHora(int idJuego, string hora, string dia)
         {
             try
             {
-                string query = "SELECT ID_SORTEO, HORA FROM TB_SORTEO WHERE ID_JUEGO=" + ID_JUEGO;
+                string query = "SELECT ID_SORTEO, HORA FROM TB_SORTEO WHERE ID_JUEGO=" + idJuego;
                 string result1 = string.Empty, result2 = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -235,9 +235,9 @@ namespace WCF
                     {
                         result1 = reader.GetString(0);
                         result2 = reader.GetString(1);
-                        if (string.Equals(result2, HORA))
+                        if (string.Equals(result2, hora))
                         {
-                            if (ConsultarDia(Convert.ToInt32(result1), DIA) == 0)
+                            if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
                             {
                                 return 0;
                             }
@@ -256,11 +256,11 @@ namespace WCF
             }
         }
 
-        public void ObtenerItem(int ID_ITEM, ref int CUPO, ref float MONTO)
+        public void ObtenerItem(int idItem, ref int cupo, ref float monto)
         {
             try
             {
-                string query = "SELECT CUPO, MONTO FROM TB_ITEM WHERE ID_ITEM=" + ID_ITEM;
+                string query = "SELECT CUPO, MONTO FROM TB_ITEM WHERE ID_ITEM=" + idItem;
                 string result1 = string.Empty, result2 = string.Empty;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -273,8 +273,8 @@ namespace WCF
                 {
                     result1 = reader.GetString(0);
                     result2 = reader.GetString(1);
-                    CUPO = Convert.ToInt32(result1);
-                    MONTO = (float) Convert.ToDouble(result1);
+                    cupo = Convert.ToInt32(result1);
+                    monto = (float) Convert.ToDouble(result1);
                 }
                 else
                 {
@@ -322,8 +322,8 @@ namespace WCF
                     return new Respuesta("El sorteo de hora" + s.HORA + " para el día" + s.DIA + " del juego" + s.ID_JUEGO + " ya se encuentra registrado en el sistema");
                 }
 
-                int result, CUPO = 0;
-                float MONTO = 0;
+                int result, cupo = 0;
+                float monto = 0;
                 string query;
 
                 connection.Open();
@@ -332,7 +332,7 @@ namespace WCF
                 result = Conectar(query);
 
                 string ID_SORTEO = "SELECT DISTINCT LAST_INSERT_ID() FROM TB_SORTEO";
-                ObtenerItem(s.ID_ITEM, ref CUPO, ref MONTO);
+                ObtenerItem(s.ID_ITEM, ref cupo, ref monto);
 
                 query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + CUPO + "', " + MONTO + "', " + 1 + ")";
                 result = Conectar(query);
@@ -500,16 +500,16 @@ namespace WCF
                 }
 
                 connection.Open();
-                int result, CUPO = 0;
-                float MONTO = 0;
+                int result, cupo = 0;
+                float monto = 0;
                 string query;
 
                 query = "UPDATE TB_SORTEO SET ID_JUEGO='" + s.ID_JUEGO + "', HORA='" + s.HORA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
                 result = Conectar(query);
 
-                ObtenerItem(s.ID_ITEM, ref CUPO, ref MONTO);
+                ObtenerItem(s.ID_ITEM, ref cupo, ref monto);
 
-                query = "UPDATE TB_SORTEO_ITEM SET ID_ITEM='" + s.ID_ITEM + "', CUPO='" + CUPO + "', MONTO='" + MONTO + " WHERE ID_SORTEO=" + s.ID_SORTEO;
+                query = "UPDATE TB_SORTEO_ITEM SET ID_ITEM='" + s.ID_ITEM + "', CUPO='" + cupo + "', MONTO='" + monto + " WHERE ID_SORTEO=" + s.ID_SORTEO;
                 result = Conectar(query);
 
                 query = "UPDATE TB_DIA A JOIN TB_DIA_SORTEO B ON A.ID_DIA=B.ID_DIA SET A.NOMBRE='" + s.DIA + " WHERE B.ID_SORTEO=" + s.ID_SORTEO;
