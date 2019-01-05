@@ -7,28 +7,19 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 using Sorteos;
 
 namespace WCF
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
-    // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class Service1 : IService1
     {
-
         MySqlConnection connection;
-        MySqlConnectionStringBuilder builder;
 
         public Service1()
         {
-            builder = new MySqlConnectionStringBuilder();
-            builder.Server = "127.0.0.1";
-            builder.Port = 3306;
-            builder.UserID = "root";
-            builder.Password = "jalejandro541";
-            builder.Database = "proyecto";
-
-            connection = new MySqlConnection(builder.ToString());
+            String cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+            connection = new MySqlConnection(cx);
         }
 
         public int Conectar(string query)
@@ -287,6 +278,42 @@ namespace WCF
             }
         }
 
+        public int ConsultarApuestas(int idSorteo)
+        {
+            try
+            {
+                string query = "SELECT ESTATUS FROM TB_JUGADA WHERE ID_SORTEO=" + idSorteo;
+                string result = string.Empty;
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader;
+
+                connection.Open();
+
+                reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    result = reader.GetString(0);
+                    if (Convert.ToInt32(result) != 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        
         public Respuesta CrearSorteo(Sorteo s)
         {
             try
@@ -334,7 +361,7 @@ namespace WCF
                 string ID_SORTEO = "SELECT DISTINCT LAST_INSERT_ID() FROM TB_SORTEO";
                 ObtenerItem(s.ID_ITEM, ref cupo, ref monto);
 
-                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + CUPO + "', " + MONTO + "', " + 1 + ")";
+                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + cupo + "', " + monto + "', " + 1 + ")";
                 result = Conectar(query);
 
                 query = "INSERT INTO TB_DIA (ID_DIA, NOMBRE, ESTATUS) VALUES (NULL, '" + s.DIA + "', " + 1 + ")";
@@ -430,7 +457,10 @@ namespace WCF
                     return new Respuesta("El sorteo que intenta eliminar no se encuentra registrado en el sistema");
                 }
 
-                //validar apuestas activas
+                if (ConsultarApuestas(s.ID_SORTEO) == 0)
+                {
+                    return new Respuesta("El sorteo que intenta eliminar tiene apuestas activas asociadas");
+                }
 
                 connection.Open();
 
