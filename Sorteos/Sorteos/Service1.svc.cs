@@ -21,13 +21,28 @@ namespace WCF
             String cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             connection = new MySqlConnection(cx);
         }
-
+        /* Método: Conectar
+         * 
+         * @param query: query de ejecuion sobre la base de datos
+         * @return retorna la validez de la ejecución del query en la base de datos
+         */
         public int Conectar(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();
         }
 
+        /*
+         * Método: ConsultarJuego
+         * ----------------------
+         * Esta funcion permite conocer el estatus de un juego (Activo o Inactivo)
+         * 
+         * @param idJuego: entero que representa el id del juego en la base de datos
+         * @retrun retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
+         * @return retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
+         * @return retorna 0 si no consigue la fila en la base de datos
+         * 
+         */
         public int ConsultarJuego(int idJuego)
         {
             try
@@ -62,6 +77,8 @@ namespace WCF
                 connection.Close();
             }
         }
+
+
 
         public int ConsultarItem(int idItem)
         {
