@@ -1,5 +1,5 @@
 # Sorteos
-Se solicitan desarrollar 5 casos de uso.
+Se solicitan desarrollar 4 casos de uso.
 Crear Sorteo
 Descripción: Se debe desarrollar un servicio web que posea un método que permita la creación
 de los sorteos de los juegos del sistema, para ello el sistema deberá.
