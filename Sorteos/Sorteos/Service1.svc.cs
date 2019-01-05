@@ -30,13 +30,28 @@ namespace WCF
 
             connection = new MySqlConnection(builder.ToString());
         }
-
+        /* Método: Conectar
+         * 
+         * @param query: query de ejecuion sobre la base de datos
+         * @return retorna la validez de la ejecución del query en la base de datos
+         */
         public int Conectar(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();
         }
 
+        /*
+         * Método: ConsultarJuego
+         * ----------------------
+         * Esta funcion permite conocer el estatus de un juego (Activo o Inactivo)
+         * 
+         * @param idJuego: entero que representa el id del juego en la base de datos
+         * @retrun retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
+         * @return retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
+         * @return retorna 0 si no consigue la fila en la base de datos
+         * 
+         */
         public int ConsultarJuego(int idJuego)
         {
             try
@@ -71,6 +86,8 @@ namespace WCF
                 connection.Close();
             }
         }
+
+
 
         public int ConsultarItem(int idItem)
         {
@@ -334,7 +351,7 @@ namespace WCF
                 string ID_SORTEO = "SELECT DISTINCT LAST_INSERT_ID() FROM TB_SORTEO";
                 ObtenerItem(s.ID_ITEM, ref cupo, ref monto);
 
-                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + CUPO + "', " + MONTO + "', " + 1 + ")";
+                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + cupo + "', " + monto + "', " + 1 + ")";
                 result = Conectar(query);
 
                 query = "INSERT INTO TB_DIA (ID_DIA, NOMBRE, ESTATUS) VALUES (NULL, '" + s.DIA + "', " + 1 + ")";
