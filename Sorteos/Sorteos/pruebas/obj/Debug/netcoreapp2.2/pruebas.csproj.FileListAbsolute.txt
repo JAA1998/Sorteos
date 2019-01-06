@@ -1,0 +1,14 @@
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\pruebas.deps.json
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\pruebas.runtimeconfig.json
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\pruebas.runtimeconfig.dev.json
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\pruebas.dll
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\bin\Debug\netcoreapp2.2\pruebas.pdb
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.csprojAssemblyReference.cache
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.csproj.CoreCompileInputs.cache
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.AssemblyInfoInputs.cache
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.AssemblyInfo.cs
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.dll
+C:\Users\Oscar\Documents\oscar_j\proyectoIngenieria\Sorteos\Sorteos\Sorteos\pruebas\obj\Debug\netcoreapp2.2\pruebas.pdb
