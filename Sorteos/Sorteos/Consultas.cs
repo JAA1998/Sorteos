@@ -324,55 +324,7 @@ namespace Sorteos
                 connection.Close();
             }
         }
-        public Respuesta ConsultarSorteoxJuego(Sorteo s)
-        {
-            try
-            {
-
-                if (s.ID_JUEGO.ToString().Length == 0)
-                {
-                    throw new ParameterException("ID_JUEGO");
-                }
-
-                if (ConsultarJuego(s.ID_JUEGO) == 0)
-                {
-                    return new Respuesta("El juego que intenta consultar no se encuentra registrado en el sistema");
-                }
-
-                string query = "SELECT A.ID_SORTEO, A.HORA, D.NOMBRE, A.ESTATUS, F.NOMBRE, F.VALOR, F.CUPO, F.MONTO FROM TB_SORTEO A JOIN TB_JUEGO B ON A.ID_JUEGO=B.ID_JUEGO JOIN TB_DIA_SORTEO C ON A.ID_SORTEO=C.ID_SORTEO JOIN TB_DIA D ON C.ID_DIA=D.ID_DIA JOIN TB_SORTEO_ITEM E ON A.ID_SORTEO=E.ID_SORTEO JOIN TB_ITEM F ON E.ID_ITEM=F.ID_ITEM WHERE B.ID_JUEGO=" + s.ID_JUEGO;
-                Respuesta result = new Respuesta(string.Empty);
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader reader;
-
-                connection.Open();
-
-                reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        result.Mensaje = reader.GetString(0) + "-" + reader.GetString(1) + "-" + reader.GetString(2) + "-" + reader.GetString(3) + "-" + reader.GetString(4) + "-" + reader.GetString(5) + "-" + reader.GetString(6) + "-" + reader.GetString(7);
-                    }
-
-                    return result;
-                }
-                else
-                {
-                    return new Respuesta("No se encontró");
-                }
-
-            }
-            catch (Exception e)
-            {
-                return new Respuesta("Error: " + e.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-        }
+        
         
     }
 }
