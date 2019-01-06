@@ -28,7 +28,7 @@ namespace WCF
             builder.Server = "127.0.0.1";
             builder.Port = 3306;
             builder.UserID = "root";
-            builder.Password = "jalejandro541";
+            builder.Password = "";
             builder.Database = "proyecto";
             connection = new MySqlConnection(builder.ToString());
         }
