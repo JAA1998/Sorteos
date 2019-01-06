@@ -15,11 +15,22 @@ namespace Sorteos
     public class Service1 : IService1
     {
         MySqlConnection connection;
+        MySqlConnectionStringBuilder builder;
 
         public Service1()
         {
-            String cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
-            connection = new MySqlConnection(cx);
+            /*string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+             *ESTO VA EN EL WEB.CONFIG:
+             *<connectionStrings>
+             *  <add name="cn" connectionString="Server=127.0.0.1;Port=3306;Database=proyecto;Uid=root;Pwd=jalejandro541" providerName="MySql.Data.MySqlClient.MySqlConnection"/>
+             *</connectionStrings>*/
+            builder = new MySqlConnectionStringBuilder();
+            builder.Server = "127.0.0.1";
+            builder.Port = 3306;
+            builder.UserID = "root";
+            builder.Password = "";
+            builder.Database = "proyecto";
+            connection = new MySqlConnection(builder.ToString());
         }
         /**
          * Método: Conectar
@@ -27,7 +38,7 @@ namespace Sorteos
          * @param query: query de ejecuion sobre la base de datos
          * @return retorna la validez de la ejecución del query en la base de datos
          */
-        public int Conectar(string query)
+            public int Conectar(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();
