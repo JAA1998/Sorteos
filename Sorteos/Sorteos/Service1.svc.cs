@@ -21,8 +21,9 @@ namespace WCF
             String cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             connection = new MySqlConnection(cx);
         }
-        /* Método: Conectar
-         * 
+        /**
+         * Método: Conectar
+         * -----------------------------------------------
          * @param query: query de ejecuion sobre la base de datos
          * @return retorna la validez de la ejecución del query en la base de datos
          */
@@ -32,13 +33,13 @@ namespace WCF
             return command.ExecuteNonQuery();
         }
 
-        /*
+        /**
          * Método: ConsultarJuego
-         * ----------------------
+         * ----------------------------------------------------------
          * Esta funcion permite conocer el estatus de un juego (Activo o Inactivo)
          * 
          * @param idJuego: entero que representa el id del juego en la base de datos
-         * @retrun retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
+         * @return retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
          * @return retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
          * @return retorna 0 si no consigue la fila en la base de datos
          * 
@@ -77,9 +78,14 @@ namespace WCF
                 connection.Close();
             }
         }
-
-
-
+        /**
+          * Metodo: ConsultarItem
+          * ------------------------------------------------------
+          * Esta funcion es para consultar un item 
+          * @param idItem: Identificador del item que se quiere consultar
+          * @return: retorna 1 si se logra obtener el item
+          * @return: retorna 0 si ocurre un error
+          */
         public int ConsultarItem(int idItem)
         {
             try
@@ -116,6 +122,14 @@ namespace WCF
             }
         }
 
+        /**
+          * Metodo: ConsultarSorteo
+          * ---------------------------------------------------------
+          * Esta funcion es para consultar un sorteo  
+          * @param idSorteo: Identificador del sorteo que se quiere consultar
+          * @return: retorna 1 si se logra obtener el sorteo
+          * @return: retorna 0 si ocurre un error o no se encontro
+          */
         public int ConsultarSorteo(int idSorteo)
         {
             try
@@ -152,6 +166,15 @@ namespace WCF
             }
         }
 
+        /**
+          * Metodo: ConsultarSJ
+          * ------------------------------------------------------------------
+          * Esta funcion es para consultar un sorteo de un determinado juego
+          * @param idSorteo: Identificador del sorteo que se quiere consultar
+          * @param idJuego: Identificador del juego al que se le buscara un sorteo 
+          * @return: retorna 1 si se logra obtener el sorteo
+          * @return: retorna 0 si ocurre un error o no se encontro
+          */
         public int ConsultarSJ(int idSorteo, int idJuego)
         {
             try
@@ -188,6 +211,16 @@ namespace WCF
             }
         }
 
+        /**
+          * Metodo: ConsultarDia
+          * ------------------------------------------------------------------
+          * Esta funcion es para consultar el dia de un sorteo y verificar si
+          * es igual al dia que se le pasa como parametro
+          * @param idSorteo: Identificador del sorteo que se quiere consultar
+          * @param dia: Es el dia que se quiere revisar
+          * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
+          * @return: retorna 1 si ocurre un error o no son iguales
+          */
         public int ConsultarDia(int idSorteo, string dia)
         {
             try
@@ -224,6 +257,17 @@ namespace WCF
             }
         }
 
+        /**
+          * Metodo: ConsultarHora
+          * ------------------------------------------------------------------
+          * Esta funcion es para consultar si hay un sorteo del juego 
+          * a la hora que se le pasa por parametro 
+          * @param idJuego: Identificador del juego al que 
+          * @param hora: Es la hora que se quiere revisar
+          * @param dia: es el dia del sorteo que se quiere revisar
+          * @return: retorna 0 ya existe un sorteo en esa hora 
+          * @return: retorna 1 si ocurre un error o no existe un sorteo a esa hora
+          */
         public int ConsultarHora(int idJuego, string hora, string dia)
         {
             try
@@ -243,6 +287,7 @@ namespace WCF
                     {
                         result1 = reader.GetString(0);
                         result2 = reader.GetString(1);
+                        if ( !ConsultarSorteo(result1)) return 1;
                         if (string.Equals(result2, hora))
                         {
                             if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
