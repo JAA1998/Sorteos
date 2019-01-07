@@ -114,7 +114,7 @@ namespace PruebasUnitarias
             try
             {
 
-                Assert.Equals(1, result.ConsultarJuego(idJuego));
+                Assert.Equal(1, result.ConsultarJuego(idJuego));
             }
             catch (Exception e)
             {
@@ -130,7 +130,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(1, result.ConsultarItem(idItem));
+                Assert.Equal(1, result.ConsultarItem(idItem));
             }
             catch (Exception e)
             {
@@ -147,7 +147,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(1, result.ConsultarItem(idSorteo));
+                Assert.Equal(1, result.ConsultarItem(idSorteo));
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(1, result.ConsultarSJ(idSorteo, idSorteo));
+                Assert.Equal(1, result.ConsultarSJ(idSorteo, idSorteo));
             }
             catch (Exception e)
             {
@@ -181,7 +181,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(0, result.ConsultarDia(idSorteo, dia));
+                Assert.Equal(0, result.ConsultarDia(idSorteo, dia));
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(0, result.ConsultarHora(idSorteo, hora, dia));
+                Assert.Equal(0, result.ConsultarHora(idSorteo, hora, dia));
             }
             catch (Exception e)
             {
@@ -216,12 +216,12 @@ namespace PruebasUnitarias
             try
             {
 
-                Assert.Equals(1, result.ConsultarApuestas(idSorteo));
+                Assert.Equal(1, result.ConsultarApuestas(idSorteo));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw new Respuesta("Error: " + e.Message);
             }
         }
         // Nose si esta prueba es asi por ser un void
@@ -233,7 +233,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Assert.Equals(0, result.ConsultarDatosItem(idItem, cupo, monto));
+                Assert.Equals(0, result.ConsultarDatosItem(idItem,cupo,monto));
             }
             catch (Exception e)
             {
