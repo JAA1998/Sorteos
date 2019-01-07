@@ -34,8 +34,7 @@ namespace PruebasUnitarias
             }
             catch (Exception e)
             {
-
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
         [Fact]
@@ -55,7 +54,7 @@ namespace PruebasUnitarias
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -81,7 +80,7 @@ namespace PruebasUnitarias
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -102,40 +101,40 @@ namespace PruebasUnitarias
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
         [Theory]
         [InlineData(2)]
         public void PruebaConsultarJuego(int idJuego)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
 
-                Assert.Equals(1, result.ConsultarJuego(idJuego));
+                Assert.Equal(1, result.ConsultarJuego(idJuego));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
         [Theory]
         [InlineData(3)]
         public void PruebaConsultarItem(int idItem)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(1, result.ConsultarItem(idItem));
+                Assert.Equal(1, result.ConsultarItem(idItem));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -143,16 +142,16 @@ namespace PruebasUnitarias
         [InlineData(1)]
         public void PruebaConsultarSorteo(int idSorteo)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(1, result.ConsultarItem(idSorteo));
+                Assert.Equal(1, result.ConsultarItem(idSorteo));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -160,16 +159,16 @@ namespace PruebasUnitarias
         [InlineData(1, 4)]
         public void PruebaConsultarSJ(int idSorteo, int idJuego)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(1, result.ConsultarSJ(idSorteo, idSorteo));
+                Assert.Equal(1, result.ConsultarSJ(idSorteo, idJuego));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -177,16 +176,16 @@ namespace PruebasUnitarias
         [InlineData(1, "Martes")]
         public void PruebaConsultarDia(int idSorteo, string dia)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(0, result.ConsultarDia(idSorteo, dia));
+                Assert.Equal(0, result.ConsultarDia(idSorteo, dia));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -194,16 +193,16 @@ namespace PruebasUnitarias
         [InlineData(1, "Martes", "4:30")]
         public void PruebaConsultarHora(int idSorteo, string dia, string hora)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(0, result.ConsultarHora(idSorteo, hora, dia));
+                Assert.Equal(0, result.ConsultarHora(idSorteo, hora, dia));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
 
@@ -211,17 +210,17 @@ namespace PruebasUnitarias
         [InlineData(4)]
         public void PruebaConsultarApuestas(int idSorteo)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
 
-                Assert.Equals(1, result.ConsultarApuestas(idSorteo));
+                Assert.Equal(1, result.ConsultarApuestas(idSorteo));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
         // Nose si esta prueba es asi por ser un void
@@ -229,16 +228,16 @@ namespace PruebasUnitarias
         [InlineData(1, 4, 200)]
         public void PruebaConsultarDatosItem(int idItem, ref int cupo, ref float monto)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
-                Assert.Equals(0, result.ConsultarDatosItem(idItem, cupo, monto));
+                Assert.Equal(0, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
             }
             catch (Exception e)
             {
 
-                return new Respuesta("Error: " + e.Message);
+                throw e;
             }
         }
     }
