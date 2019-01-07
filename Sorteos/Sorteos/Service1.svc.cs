@@ -373,7 +373,7 @@ namespace Sorteos
          * @param cupo: cupo del juego a consultar
          * @param monto: monto a consultar
          */
-        public void ConsultarDatosItem(int idItem, ref int cupo, ref float monto)
+        public int ConsultarDatosItem(int idItem, ref int cupo, ref float monto)
         {
             try
             {
@@ -392,10 +392,11 @@ namespace Sorteos
                     result2 = reader.GetString(1);
                     cupo = Convert.ToInt32(result1);
                     monto = (float)Convert.ToDouble(result1);
+                    return 0;
                 }
                 else
                 {
-                    throw new Exception();
+                   return 1;
                 }
             }
             finally
@@ -450,7 +451,8 @@ namespace Sorteos
                 result = Conectar(query);
 
                 string ID_SORTEO = "SELECT DISTINCT LAST_INSERT_ID() FROM TB_SORTEO";
-                ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto);
+                 if ( ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto)== 1)
+                    return new Respuesta("El item no fue encontrado");
 
                 query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + cupo + "', " + monto + "', " + 1 + ")";
                 result = Conectar(query);
@@ -578,7 +580,8 @@ namespace Sorteos
                 query = "UPDATE TB_SORTEO SET ID_JUEGO='" + s.ID_JUEGO + "', HORA='" + s.HORA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
                 result = Conectar(query);
 
-                ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto);
+                if ( ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto)== 1)
+                    return new Respuesta("El item no fue encontrado");
 
                 query = "UPDATE TB_SORTEO_ITEM SET ID_ITEM='" + s.ID_ITEM + "', CUPO='" + cupo + "', MONTO='" + monto + " WHERE ID_SORTEO=" + s.ID_SORTEO;
                 result = Conectar(query);
