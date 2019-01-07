@@ -109,7 +109,7 @@ namespace PruebasUnitarias
         [InlineData(2)]
         public void PruebaConsultarJuego(int idJuego)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -126,7 +126,7 @@ namespace PruebasUnitarias
         [InlineData(3)]
         public void PruebaConsultarItem(int idItem)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -143,7 +143,7 @@ namespace PruebasUnitarias
         [InlineData(1)]
         public void PruebaConsultarSorteo(int idSorteo)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -160,7 +160,7 @@ namespace PruebasUnitarias
         [InlineData(1, 4)]
         public void PruebaConsultarSJ(int idSorteo, int idJuego)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -177,7 +177,7 @@ namespace PruebasUnitarias
         [InlineData(1, "Martes")]
         public void PruebaConsultarDia(int idSorteo, string dia)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -194,7 +194,7 @@ namespace PruebasUnitarias
         [InlineData(1, "Martes", "4:30")]
         public void PruebaConsultarHora(int idSorteo, string dia, string hora)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -211,7 +211,7 @@ namespace PruebasUnitarias
         [InlineData(4)]
         public void PruebaConsultarApuestas(int idSorteo)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
@@ -229,7 +229,7 @@ namespace PruebasUnitarias
         [InlineData(1, 4, 200)]
         public void PruebaConsultarDatosItem(int idItem, ref int cupo, ref float monto)
         {
-            Consultas result = new Consultas();
+            Service1 result = new Service1();
 
             try
             {
