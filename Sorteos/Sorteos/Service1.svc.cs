@@ -37,7 +37,7 @@ namespace Sorteos
          * Método: Conectar
          * -----------------------------------------------
          * @param query: query de ejecuion sobre la base de datos
-         * @return retorna la validez de la ejecución del query en la base de datos
+         * @return: retorna la validez de la ejecución del query en la base de datos
          */
             public int Conectar(string query)
         {
@@ -50,12 +50,9 @@ namespace Sorteos
          * Método: ConsultarJuego
          * -------------------------------------------------------------------------------------------------
          * Esta funcion permite conocer el estatus de un juego (Activo o Inactivo)
-         * 
          * @param idJuego: entero que representa el id del juego en la base de datos
-         * @return retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
-         * @return retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
-         * @return retorna 0 si no consigue la fila en la base de datos
-         * 
+         * @return: retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
+         * @return: retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
          */
         public int ConsultarJuego(int idJuego)
         {
@@ -95,7 +92,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarItem
           * -------------------------------------------------------------
-          * Esta funcion es para consultar un item 
+          * Esta funcion consulta el estatus de un item
           * @param idItem: Identificador del item que se quiere consultar
           * @return: retorna 1 si se logra obtener el item
           * @return: retorna 0 si ocurre un error
@@ -139,7 +136,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarSorteo
           * -----------------------------------------------------------------
-          * Esta funcion es para consultar un sorteo  
+          * Esta funcion consulta el estatus de un sorteo
           * @param idSorteo: Identificador del sorteo que se quiere consultar
           * @return: retorna 1 si se logra obtener el sorteo
           * @return: retorna 0 si ocurre un error o no se encontro
@@ -326,7 +323,11 @@ namespace Sorteos
         /*
          * Metodo: ConsultarApuestas
          * ------------------------------------------------------------------------------
-         * Esta función permite consultar 
+         * Esta función permite consultar el estatus de una apuesta realizada según el
+         * sorteo que es pasado por parametro
+         * @param idSorteo: Identificador del sorteo a consultar
+         * @return: 1 si consigue la fila en la base de datos el id
+         * @retrun: 0 si no consigue la fila o existe un error
          */
         public int ConsultarApuestas(int idSorteo)
         {
@@ -363,7 +364,15 @@ namespace Sorteos
                 connection.Close();
             }
         }
-
+        /*
+         * Método: ConsultarDatosItem
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la consulta de los datos tales como cupo y monto segun
+         * el item pasados por parametro
+         * @param idItem: Identificador de referencia en la base de datos
+         * @param cupo: cupo del juego a consultar
+         * @param monto: monto a consultar
+         */
         public void ConsultarDatosItem(int idItem, ref int cupo, ref float monto)
         {
             try
