@@ -39,7 +39,7 @@ namespace Sorteos
          * @param query: query de ejecuion sobre la base de datos
          * @return: retorna la validez de la ejecución del query en la base de datos
          */
-            public int Conectar(string query)
+        public int Conectar(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();

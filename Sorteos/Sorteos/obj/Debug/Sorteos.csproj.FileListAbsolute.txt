@@ -11,3 +11,14 @@ C:\Users\Javier\Desktop\Sorteos\Sorteos\Sorteos\bin\MySql.Data.xml
 C:\Users\Javier\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.csproj.CopyComplete
 C:\Users\Javier\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.dll
 C:\Users\Javier\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.pdb
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\Sorteos.dll.config
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\Sorteos.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\Sorteos.pdb
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\MySql.Data.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\Google.Protobuf.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\bin\MySql.Data.xml
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.csprojAssemblyReference.cache
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.csproj.CoreCompileInputs.cache
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.csproj.CopyComplete
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\Sorteos\Sorteos\obj\Debug\Sorteos.pdb
