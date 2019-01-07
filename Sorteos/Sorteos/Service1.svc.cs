@@ -35,7 +35,8 @@ namespace Sorteos
         }
         /**
          * Método: Conectar
-         * -----------------------------------------------
+         * ---------------------------------------------------------------------------
+         * Esta funcion realiza la conexion a la base de datos
          * @param query: query de ejecuion sobre la base de datos
          * @return: retorna la validez de la ejecución del query en la base de datos
          */
@@ -49,7 +50,7 @@ namespace Sorteos
         /**
          * Método: ConsultarJuego
          * -------------------------------------------------------------------------------------------------
-         * Esta funcion permite conocer el estatus de un juego (Activo o Inactivo)
+         * Esta funcion permite consultar el estatus de un juego (Activo o Inactivo)
          * @param idJuego: entero que representa el id del juego en la base de datos
          * @return: retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
          * @return: retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
@@ -92,7 +93,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarItem
           * -------------------------------------------------------------
-          * Esta funcion consulta el estatus de un item
+          * Esta funcion permite consultar el estatus de un item
           * @param idItem: Identificador del item que se quiere consultar
           * @return: retorna 1 si se logra obtener el item
           * @return: retorna 0 si ocurre un error
@@ -136,7 +137,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarSorteo
           * -----------------------------------------------------------------
-          * Esta funcion consulta el estatus de un sorteo
+          * Esta funcion permite consultar el estatus de un sorteo
           * @param idSorteo: Identificador del sorteo que se quiere consultar
           * @return: retorna 1 si se logra obtener el sorteo
           * @return: retorna 0 si ocurre un error o no se encontro
@@ -180,7 +181,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarSJ
           * ----------------------------------------------------------------------
-          * Esta funcion es para consultar un sorteo de un determinado juego
+          * Esta funcion permite consultar un sorteo de un determinado juego
           * @param idSorteo: Identificador del sorteo que se quiere consultar
           * @param idJuego: Identificador del juego al que se le buscara un sorteo 
           * @return: retorna 1 si se logra obtener el sorteo
@@ -225,7 +226,7 @@ namespace Sorteos
         /**
           * Metodo: ConsultarDia
           * ------------------------------------------------------------------
-          * Esta funcion es para consultar el dia de un sorteo y verificar si
+          * Esta funcion permite consultar el dia de un sorteo y verificar si
           * es igual al dia que se le pasa como parametro
           * @param idSorteo: Identificador del sorteo que se quiere consultar
           * @param dia: Es el dia que se quiere revisar
@@ -271,8 +272,8 @@ namespace Sorteos
         /**
           * Metodo: ConsultarHora
           * -----------------------------------------------------------------------
-          * Esta funcion es para consultar si hay un sorteo del juego 
-          * a la hora que se le pasa por parametro 
+          * Esta funcion permite consultar si hay un sorteo del juego a la hora que es 
+          * pasada por parametro 
           * @param idJuego: Identificador del juego al que 
           * @param hora: Es la hora que se quiere revisar
           * @param dia: es el dia del sorteo que se quiere revisar

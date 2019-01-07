@@ -163,11 +163,8 @@ namespace PruebasUnitarias
 
             try
             {
-<<<<<<< HEAD
                 Assert.Equal(1, result.ConsultarSJ(idSorteo, idSorteo));
-=======
                 Assert.Equal(1, result.ConsultarSJ(idSorteo, idJuego));
->>>>>>> 162e35f5f6f1c5fa343c38004d4554cee058f06e
             }
             catch (Exception e)
             {
@@ -223,12 +220,7 @@ namespace PruebasUnitarias
             }
             catch (Exception e)
             {
-
-<<<<<<< HEAD
-                throw new Respuesta("Error: " + e.Message);
-=======
                 throw e;
->>>>>>> 162e35f5f6f1c5fa343c38004d4554cee058f06e
             }
         }
         // Nose si esta prueba es asi por ser un void
@@ -240,11 +232,7 @@ namespace PruebasUnitarias
 
             try
             {
-<<<<<<< HEAD
-                Assert.Equals(0, result.ConsultarDatosItem(idItem,cupo,monto));
-=======
-                Assert.Equal(0, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
->>>>>>> 162e35f5f6f1c5fa343c38004d4554cee058f06e
+                Assert.Equal(0, result.ConsultarDatosItem(idItem,ref cupo, ref monto));
             }
             catch (Exception e)
             {
