@@ -297,9 +297,8 @@ namespace Sorteos
                     while (reader.Read())
                     {
                         result1 = reader.GetString(0);
-                        result2 = reader.GetString(1);
-                        if ((ConsultarSorteo(Convert.ToInt32(result1))) == 0) return 1;
-                        if (string.Equals(result2, hora))
+                        result2 = reader.GetString(1); 
+                        if (string.Equals(result2, hora) && (ConsultarSorteo(Convert.ToInt32(result1))) == 1)
                         {
                             if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
                             {
