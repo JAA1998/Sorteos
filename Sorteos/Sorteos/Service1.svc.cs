@@ -359,6 +359,10 @@ namespace Sorteos
                     return 0;
                 }
             }
+            catch (Exception e)
+            {
+                throw e;
+            }
             finally
             {
                 connection.Close();
