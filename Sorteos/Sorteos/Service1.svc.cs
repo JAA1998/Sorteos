@@ -29,8 +29,8 @@ namespace Sorteos
             builder.Server = "127.0.0.1";
             builder.Port = 3306;
             builder.UserID = "root";
-            builder.Password = "";
-            builder.Database = "proyecto";
+            builder.Password = "ve26573051";
+            builder.Database = "practica1";
             connection = new MySqlConnection(builder.ToString());
         }
         /**

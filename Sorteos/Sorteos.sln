@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorteos", "Sorteos\Sorteos.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitarias", "PruebasUnitarias\PruebasUnitarias.csproj", "{392B7F38-D3D6-48D9-B99C-3BBE90437DE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitariasSorteos", "PruebasUnitariasSorteos\PruebasUnitariasSorteos.csproj", "{CA8F099F-3035-4BCB-97B7-335D429F47CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{392B7F38-D3D6-48D9-B99C-3BBE90437DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392B7F38-D3D6-48D9-B99C-3BBE90437DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392B7F38-D3D6-48D9-B99C-3BBE90437DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8F099F-3035-4BCB-97B7-335D429F47CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8F099F-3035-4BCB-97B7-335D429F47CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8F099F-3035-4BCB-97B7-335D429F47CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8F099F-3035-4BCB-97B7-335D429F47CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
