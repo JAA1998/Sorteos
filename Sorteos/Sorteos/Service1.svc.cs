@@ -30,7 +30,7 @@ namespace Sorteos
             builder.Port = 3306;
             builder.UserID = "root";
             builder.Password = "ve26573051";
-            builder.Database = "practica1";
+            builder.Database = "proyecto";
             connection = new MySqlConnection(builder.ToString());
         }
         /**
@@ -70,7 +70,7 @@ namespace Sorteos
 
                 if (reader.HasRows)
                 {
-                    result = reader.GetString(0);
+                    result = reader.GetString(7);
                     if (Convert.ToInt32(result) == 1)
                     {
                         return 1;
@@ -333,35 +333,20 @@ namespace Sorteos
         {
             try
             {
+                connection.Open();
                 string query = "SELECT ESTATUS FROM TB_JUGADA WHERE ID_SORTEO=" + idSorteo;
-                string result = string.Empty;
+                float result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
-
-                connection.Open();
-
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows)
-                {
-                    result = reader.GetString(0);
-                    if (Convert.ToInt32(result) != 0)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                while (reader.Read()){
+                    result = reader.GetInt16(0);
                 }
-                else
-                {
-                    return 0;
+                if(result == 1) {
+                    return 1;
                 }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                else return 0;
             }
             finally
             {

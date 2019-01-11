@@ -213,12 +213,11 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-
                 Assert.AreEqual(1, result.ConsultarApuestas(idSorteo));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
             }
         }
         // Nose si esta prueba es asi por ser un void
