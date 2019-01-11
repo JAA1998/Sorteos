@@ -36,3 +36,10 @@ INSERT INTO TB_ITEM values(1,1,'algo','algo',1,20,1);
 
 /*Insertar en JUGADA el TICKET, SORTEO, JUEGO, ITEM y CONJUNTO*/
 INSERT INTO TB_JUGADA values(1,1,1,1,1,1,'500',1);
+
+/*SEGUNDO METODO DE PRUEBA (ConsultarDia)*/
+/*Insertar DIA*/
+INSERT INTO TB_DIA values(1,'Martes',1);
+
+/*Insertar en DIA_SORTEO el DIA*/
+INSERT INTO TB_DIA_SORTEO values (1,1,1,1);
