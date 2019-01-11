@@ -14,7 +14,7 @@ namespace PruebasUnitariasSorteos
         {
             //Arrange
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_SORTEO = 2;
             sorteo1.ID_JUEGO = 1;
             sorteo1.ID_ITEM = 1;
             sorteo1.HORA = "5:30";
