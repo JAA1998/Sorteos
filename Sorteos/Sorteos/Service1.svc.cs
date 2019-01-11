@@ -60,7 +60,7 @@ namespace Sorteos
             try
             {
                 string query = "SELECT ESTATUS FROM TB_JUEGO WHERE ID_JUEGO=" + idJuego;
-                string result = string.Empty;
+                int result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
@@ -68,22 +68,13 @@ namespace Sorteos
 
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    result = reader.GetString(7);
-                    if (Convert.ToInt32(result) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    result = reader.GetInt16(0);
                 }
-                else
-                {
-                    return 0;
-                }
+                if (result == 1) return 1;
+                else return 0;
+                
             }
             finally
             {
@@ -103,30 +94,16 @@ namespace Sorteos
             try
             {
                 string query = "SELECT ESTATUS FROM TB_ITEM WHERE ID_ITEM=" + idItem;
-                string result = string.Empty;
+                int result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
-
                 connection.Open();
-
                 reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    result = reader.GetString(0);
-                    if (Convert.ToInt32(result) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                while (reader.Read()) {
+                    result = reader.GetInt16(0);
                 }
-                else
-                {
-                    return 0;
-                }
+                if (result == 1) return 1;
+                else return 0;
             }
             finally
             {
@@ -147,30 +124,20 @@ namespace Sorteos
             try
             {
                 string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo;
-                string result = string.Empty;
+                int result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
                 connection.Open();
 
                 reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    result = reader.GetString(0);
-                    if (Convert.ToInt32(result) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    result = reader.GetInt16(0);
                 }
-                else
-                {
-                    return 0;
-                }
+                if (result == 1) return 1;
+                else return 0;
+                
             }
             finally
             {
@@ -192,30 +159,20 @@ namespace Sorteos
             try
             {
                 string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo + "AND ID_JUEGO=" + idJuego;
-                string result = string.Empty;
+                int result =0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
                 connection.Open();
 
                 reader = command.ExecuteReader();
-
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    result = reader.GetString(0);
-                    if (Convert.ToInt32(result) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    result = reader.GetInt16(0);
                 }
-                else
-                {
-                    return 0;
-                }
+                if (result == 1) return 1;
+                else return 0;
+                
             }
             finally
             {
@@ -246,22 +203,13 @@ namespace Sorteos
 
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        result = reader.GetString(0);
-                        if (string.Equals(result, dia))
-                        {
-                            return 0;
-                        }
-                    }
-                    return 1;
+                while (reader.Read()) {
+                    result = reader.GetString(0);
                 }
-                else
-                {
+                if (string.Equals(result, dia))
                     return 1;
-                }
+                else return 0;
+                
             }
             finally
             {
@@ -293,26 +241,19 @@ namespace Sorteos
 
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    result1 = reader.GetString(0);
+                    result2 = reader.GetString(1);
+                    if (string.Equals(result2, hora) && (ConsultarSorteo(Convert.ToInt32(result1))) == 1)
                     {
-                        result1 = reader.GetString(0);
-                        result2 = reader.GetString(1); 
-                        if (string.Equals(result2, hora) && (ConsultarSorteo(Convert.ToInt32(result1))) == 1)
+                        if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
                         {
-                            if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
-                            {
-                                return 0;
-                            }
+                            return 1;
                         }
                     }
-                    return 1;
                 }
-                else
-                {
-                    return 1;
-                }
+                return 0;
             }
             finally
             {
@@ -335,7 +276,7 @@ namespace Sorteos
             {
                 connection.Open();
                 string query = "SELECT ESTATUS FROM TB_JUGADA WHERE ID_SORTEO=" + idSorteo;
-                float result = 0;
+                int result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
                 reader = command.ExecuteReader();
@@ -367,7 +308,8 @@ namespace Sorteos
             try
             {
                 string query = "SELECT CUPO, MONTO FROM TB_ITEM WHERE ID_ITEM=" + idItem;
-                string result1 = string.Empty, result2 = string.Empty;
+                int result1 = 0;
+                float result2 = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
@@ -375,18 +317,12 @@ namespace Sorteos
 
                 reader = command.ExecuteReader();
 
-                if (reader.HasRows)
-                {
-                    result1 = reader.GetString(0);
-                    result2 = reader.GetString(1);
-                    cupo = Convert.ToInt32(result1);
-                    monto = (float)Convert.ToDouble(result1);
-                    return 0;
+                while(reader.Read()){
+                    result1 = reader.GetInt16(0);
+                    result2 = reader.GetFloat(1);
+                    return 1;
                 }
-                else
-                {
-                   return 1;
-                }
+                return 0;
             }
             finally
             {

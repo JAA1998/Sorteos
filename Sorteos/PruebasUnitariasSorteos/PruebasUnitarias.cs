@@ -15,7 +15,7 @@ namespace PruebasUnitariasSorteos
             //Arrange
             Sorteo sorteo1 = new Sorteo();
             sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_JUEGO = 2;
+            sorteo1.ID_JUEGO = 1;
             sorteo1.ID_ITEM = 1;
             sorteo1.HORA = "5:30";
             sorteo1.DIA = "Lunes";
@@ -104,7 +104,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarJuego()
         {
             Service1 result = new Service1();
-            int idJuego = 2;
+            int idJuego = 1;
             try
             {
 
@@ -120,7 +120,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarItem()
         {
             Service1 result = new Service1();
-            int idItem = 3;
+            int idItem = 1;
 
             try
             {
@@ -154,11 +154,10 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSJ()
         {
             Service1 result = new Service1();
-            int idSorteo = 1; int idJuego = 4;
+            int idSorteo = 1; int idJuego = 1;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarSJ(idSorteo, idSorteo));
                 Assert.AreEqual(1, result.ConsultarSJ(idSorteo, idJuego));
             }
             catch (Exception e)
@@ -177,7 +176,7 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarDia(idSorteo, dia));
+                Assert.AreEqual(1, result.ConsultarDia(idSorteo, dia));
             }
             catch (Exception e)
             {
@@ -192,7 +191,7 @@ namespace PruebasUnitariasSorteos
             Service1 result = new Service1();
             int idSorteo = 1;
             string dia = "Martes";
-            string hora = "4:30";
+            string hora = "7:29";
 
             try
             {
@@ -226,12 +225,12 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idItem = 1;
-            int cupo = 4;
-            float monto = 200;
+            int cupo = 1;
+            float monto = 20;
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
+                Assert.AreEqual(1, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
             }
             catch (Exception e)
             {
