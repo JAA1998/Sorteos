@@ -16,22 +16,19 @@ namespace Sorteos
     public class Service1 : IService1
     {
         MySqlConnection connection;
-        MySqlConnectionStringBuilder builder;
+        //MySqlConnectionStringBuilder builder;
 
         public Service1()
         {
-            /*string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
-             *ESTO VA EN EL WEB.CONFIG:
-             *<connectionStrings>
-             *  <add name="cn" connectionString="Server=127.0.0.1;Port=3306;Database=proyecto;Uid=root;Pwd=jalejandro541" providerName="MySql.Data.MySqlClient.MySqlConnection"/>
-             *</connectionStrings>*/
+            /*
             builder = new MySqlConnectionStringBuilder();
             builder.Server = "127.0.0.1";
             builder.Port = 3306;
             builder.UserID = "root";
-            builder.Password = "jalejandro541";
-            builder.Database = "proyecto";
-            connection = new MySqlConnection(builder.ToString());
+            builder.Password = "ve26573051";
+            builder.Database = "proyecto";*/
+            string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+            connection = new MySqlConnection(cx);
         }
         /**
          * Método: Conectar
@@ -75,7 +72,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El juego " + idJuego + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El juego no se encuentra registrado en el sistema");
                 }
                 
             }
@@ -108,7 +105,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El item " + idItem + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El item no se encuentra registrado en el sistema");
                 }
             }
             finally
@@ -184,7 +181,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego " + idJuego);
+                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego ");
                 }
 
             }
@@ -557,7 +554,7 @@ namespace Sorteos
 
                 ConsultarJuego(s.ID_JUEGO);
 
-                string query = "SELECT A.ID_SORTEO, A.HORA, D.NOMBRE, A.ESTATUS, F.NOMBRE, F.VALOR, F.CUPO, F.MONTO FROM TB_SORTEO A JOIN TB_JUEGO B ON A.ID_JUEGO=B.ID_JUEGO JOIN TB_DIA_SORTEO C ON A.ID_SORTEO=C.ID_SORTEO JOIN TB_DIA D ON C.ID_DIA=D.ID_DIA JOIN TB_SORTEO_ITEM E ON A.ID_SORTEO=E.ID_SORTEO JOIN TB_ITEM F ON E.ID_ITEM=F.ID_ITEM WHERE B.ID_JUEGO=" + s.ID_JUEGO;
+                string query = "SELECT A.ID_SORTEO, A.HORA, D.NOMBRE, A.ESTATUS, E.ID_ITEM, F.NOMBRE, F.VALOR, E.CUPO, E.MONTO FROM TB_SORTEO A JOIN TB_JUEGO B ON A.ID_JUEGO=B.ID_JUEGO JOIN TB_DIA_SORTEO C ON A.ID_SORTEO=C.ID_SORTEO JOIN TB_DIA D ON C.ID_DIA=D.ID_DIA JOIN TB_SORTEO_ITEM E ON A.ID_SORTEO=E.ID_SORTEO JOIN TB_ITEM F ON E.ID_ITEM=F.ID_ITEM WHERE B.ID_JUEGO=" + s.ID_JUEGO;
                 Respuesta result = new Respuesta(string.Empty);
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
