@@ -246,8 +246,8 @@ namespace Sorteos
         {
             try
             {
-                string query = "SELECT ID_SORTEO, HORA FROM TB_SORTEO WHERE ID_JUEGO=" + idJuego;
-                string result1 = string.Empty, result2 = string.Empty;
+                string query = "SELECT ID_SORTEO, HORA, ESTATUS FROM TB_SORTEO WHERE ID_JUEGO=" + idJuego;
+                string result1 = string.Empty, result2 = string.Empty, result3 = string.Empty; ;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
@@ -259,15 +259,17 @@ namespace Sorteos
                 {
                     result1 = reader.GetString(0);
                     result2 = reader.GetString(1);
-                    if (string.Equals(result2, hora) && (ConsultarSorteo(Convert.ToInt32(result1))) == 1)
+                    result3 = reader.GetString(2);
+                    if (string.Equals(result2, hora) && Convert.ToInt32(result1) == 1)
                     {
-                        if (ConsultarDia(Convert.ToInt32(result1), dia) == 0)
+                        if (ConsultarDia(Convert.ToInt32(result1), dia) == 1)
                         {
-                            return 1;
+                            throw new ConsultarException("El sorteo de hora" + hora + " para el día" + dia + " del juego" + idJuego + " ya se encuentra registrado en el sistema");
                         }
                     }
                 }
-                throw new ConsultarException("El sorteo de hora" + hora + " para el día" + dia + " del juego" + idJuego + " ya se encuentra registrado en el sistema");
+                return 1;
+                
             }
             finally
             {
