@@ -158,7 +158,9 @@ namespace Sorteos
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo + "AND ID_JUEGO=" + idJuego;
+                string query1 = "SELECT ESTATUS FROM TB_SORTEO WHERE (ID_SORTEO = " + idSorteo + ")";
+                string query2 = "AND ID_JUEGO = " + idJuego;
+                string query = String.Concat(query1, query2);
                 int result =0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
@@ -281,11 +283,17 @@ namespace Sorteos
                 MySqlDataReader reader;
                 reader = command.ExecuteReader();
 
-                while (reader.Read()){
-                    result = reader.GetInt16(0);
-                }
-                if(result == 1) {
-                    return 1;
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        result = reader.GetInt16(0);
+                    }
+                    if (result == 1)
+                    {
+                        return 1;
+                    }
+                    else return 0;
                 }
                 else return 0;
             }
@@ -317,12 +325,21 @@ namespace Sorteos
 
                 reader = command.ExecuteReader();
 
-                while(reader.Read()){
-                    result1 = reader.GetInt16(0);
-                    result2 = reader.GetFloat(1);
-                    return 1;
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        result1 = reader.GetInt16(0);
+                        result2 = reader.GetFloat(1);
+                        
+                    }
+                    if (result1 == cupo && result2 == monto)
+                    {
+                        return 1;
+                    }
+                    else return 0;
                 }
-                return 0;
+                else return 0;
             }
             finally
             {

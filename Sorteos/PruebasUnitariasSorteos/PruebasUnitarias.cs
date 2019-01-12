@@ -81,7 +81,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarSorteoxJuego()
+        public void PruebaConsultarSorteoxJuego_Exito()
         {
             Sorteo sorteo1 = new Sorteo();
             sorteo1.ID_JUEGO = 2;
@@ -100,8 +100,10 @@ namespace PruebasUnitariasSorteos
                 throw e;
             }
         }
+
+
         [TestMethod]
-        public void PruebaConsultarJuego()
+        public void PruebaConsultarJuego_Exito()
         {
             Service1 result = new Service1();
             int idJuego = 1;
@@ -117,7 +119,7 @@ namespace PruebasUnitariasSorteos
             }
         }
         [TestMethod]
-        public void PruebaConsultarItem()
+        public void PruebaConsultarItem_Exito()
         {
             Service1 result = new Service1();
             int idItem = 1;
@@ -134,7 +136,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarSorteo()
+        public void PruebaConsultarSorteo_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1;
@@ -151,14 +153,14 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarSJ()
+        public void PruebaConsultarSJ_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1; int idJuego = 1;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarSJ(idSorteo, idJuego));
+                Assert.AreEqual(0, result.ConsultarSJ(idSorteo, idJuego));
             }
             catch (Exception e)
             {
@@ -168,7 +170,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarDia()
+        public void PruebaConsultarDia_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1;
@@ -186,7 +188,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarHora()
+        public void PruebaConsultarHora_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1;
@@ -205,7 +207,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarApuestas()
+        public void PruebaConsultarApuestas_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1;
@@ -219,18 +221,32 @@ namespace PruebasUnitariasSorteos
                 throw ex;
             }
         }
-        // Nose si esta prueba es asi por ser un void
+
         [TestMethod]
-        public void PruebaConsultarDatosItem()
+        public void PruebaConsultarApuestas_Fallo() {
+            Service1 result = new Service1();
+            int idSorteo = 2;
+            try
+            {
+                Assert.AreEqual(0, result.ConsultarApuestas(idSorteo));
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        
+        [TestMethod]
+        public void PruebaConsultarDatosItem_Exito()
         {
             Service1 result = new Service1();
-            int idItem = 1;
+            int idItem = 0;
             int cupo = 1;
             float monto = 20;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
+                Assert.AreEqual(0, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
             }
             catch (Exception e)
             {
@@ -238,5 +254,19 @@ namespace PruebasUnitariasSorteos
                 throw e;
             }
         }
+
+        /*[TestMethod]
+        public void PruebaConsultarDatosItem_Fallo_idItem() {
+            Service1 result = new Service1();
+            int idItem = 2;
+            int cupo = 1;
+            float monto = 20;
+            try {
+
+            }
+            catch(Exception ex){
+                throw ex;
+            }
+        }*/
     }
 }
