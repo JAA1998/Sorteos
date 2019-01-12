@@ -68,6 +68,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsultarException.cs" />
     <Compile Include="DBException.cs" />
     <Compile Include="ParameterException.cs" />
     <Compile Include="Respuesta.cs" />

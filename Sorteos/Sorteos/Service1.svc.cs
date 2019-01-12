@@ -29,7 +29,7 @@ namespace Sorteos
             builder.Server = "127.0.0.1";
             builder.Port = 3306;
             builder.UserID = "root";
-            builder.Password = "jalejandro541";
+            builder.Password = "ve26573051";
             builder.Database = "proyecto";
             connection = new MySqlConnection(builder.ToString());
         }
@@ -75,7 +75,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El juego " + idJuego + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El juego no se encuentra registrado en el sistema");
                 }
                 
             }
@@ -108,7 +108,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El item " + idItem + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El item no se encuentra registrado en el sistema");
                 }
             }
             finally
@@ -184,7 +184,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego " + idJuego);
+                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego ");
                 }
 
             }
@@ -267,7 +267,7 @@ namespace Sorteos
                         }
                     }
                 }
-                throw new ConsultarException("El sorteo de hora" + hora + " para el día" + dia + " del juego" + idJuego + " ya se encuentra registrado en el sistema");
+                throw new ConsultarException("El sorteo de hora " + hora + " para el día " + dia + " del juego " + idJuego + " ya se encuentra registrado en el sistema");
             }
             finally
             {

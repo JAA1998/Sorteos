@@ -9,6 +9,8 @@ namespace PruebasUnitariasSorteos
     [TestClass]
     public class PruebasUnitarias
     {
+       
+
         [TestMethod]
         public void PruebaCrearSorteo()
         {
@@ -37,7 +39,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaEliminarSorteo()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_SORTEO = 0;
 
             try
             {
@@ -47,7 +49,7 @@ namespace PruebasUnitariasSorteos
                 Assert.AreEqual(expected, result.EliminarSorteo(sorteo1));
 
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -73,7 +75,7 @@ namespace PruebasUnitariasSorteos
                 Assert.AreEqual(expected, result.ModificarSorteo(sorteo1));
 
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -94,7 +96,7 @@ namespace PruebasUnitariasSorteos
                 Assert.AreNotEqual(expected, result.ConsultarSorteoxJuego(sorteo1));
 
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -112,12 +114,30 @@ namespace PruebasUnitariasSorteos
 
                 Assert.AreEqual(1, result.ConsultarJuego(idJuego));
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El juego no se encuentra registrado en el sistema")]
+        public void PruebaConsultarJuego_Fallo() {
+            Service1 result = new Service1();
+            int idJuego = 0;
+            try
+            {
+                result.ConsultarJuego(idJuego);
+                Assert.Fail();
+            }
+            catch (ConsultarException e)
+            {
+
+                throw e;
+            }
+        }
+
         [TestMethod]
         public void PruebaConsultarItem_Exito()
         {
@@ -128,7 +148,25 @@ namespace PruebasUnitariasSorteos
             {
                 Assert.AreEqual(1, result.ConsultarItem(idItem));
             }
-            catch (Exception e)
+            catch (ConsultarException e)
+            {
+
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El item no se encuentra registrado en el sistema")]
+        public void PruebaConsultarItem_Fallo() {
+            Service1 result = new Service1();
+            int idItem = 0;
+
+            try
+            {
+                result.ConsultarItem(idItem);
+                Assert.Fail();
+            }
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -145,7 +183,7 @@ namespace PruebasUnitariasSorteos
             {
                 Assert.AreEqual(1, result.ConsultarItem(idSorteo));
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -160,11 +198,27 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarSJ(idSorteo, idJuego));
+                Assert.AreEqual(1, result.ConsultarSJ(idSorteo, idJuego));
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
+                throw e;
+            }
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego ")]
+        public void PruebaConsultarSJ_Fallo_idSorteo() {
+            Service1 result = new Service1();
+            int idSorteo = 0; int idJuego = 1;
+
+            try
+            {
+                result.ConsultarSJ(idSorteo, idJuego);
+                Assert.Fail();
+            }
+            catch (ConsultarException e)
+            {
                 throw e;
             }
         }
@@ -187,6 +241,23 @@ namespace PruebasUnitariasSorteos
             }
         }
 
+        /*[TestMethod]
+        public void PruebaConsultarDia_Fallo_idSorteo() {
+            Service1 result = new Service1();
+            int idSorteo = 1;
+            string dia = "Martes";
+
+            try
+            {
+                Assert.AreEqual(1, result.ConsultarDia(idSorteo, dia));
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }*/
+
         [TestMethod]
         public void PruebaConsultarHora_Exito()
         {
@@ -199,7 +270,7 @@ namespace PruebasUnitariasSorteos
             {
                 Assert.AreEqual(0, result.ConsultarHora(idSorteo, hora, dia));
             }
-            catch (Exception e)
+            catch (ConsultarException e)
             {
 
                 throw e;
@@ -216,21 +287,23 @@ namespace PruebasUnitariasSorteos
             {
                 Assert.AreEqual(1, result.ConsultarApuestas(idSorteo));
             }
-            catch (Exception ex)
+            catch (ConsultarException ex)
             {
                 throw ex;
             }
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El sorteo que intenta eliminar tiene apuestas activas asociadas")]
         public void PruebaConsultarApuestas_Fallo() {
             Service1 result = new Service1();
             int idSorteo = 2;
             try
             {
-                Assert.AreEqual(0, result.ConsultarApuestas(idSorteo));
+                result.ConsultarApuestas(idSorteo);
+                Assert.Fail();
             }
-            catch (Exception ex) {
+            catch (ConsultarException ex) {
                 throw ex;
             }
         }
@@ -240,31 +313,50 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarDatosItem_Exito()
         {
             Service1 result = new Service1();
-            int idItem = 0;
+            int idItem = 1;
             int cupo = 1;
             float monto = 20;
 
-            try
-            {
-                Assert.AreEqual(0, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
+            try{
+                Assert.AreEqual(1, result.ConsultarDatosItem(idItem, ref cupo, ref monto));
             }
-            catch (Exception e)
-            {
-
+            catch (ConsultarException e){
                 throw e;
             }
         }
 
-        /*[TestMethod]
+        [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El item no se encuentra registrado en el sistema")]
         public void PruebaConsultarDatosItem_Fallo_idItem() {
             Service1 result = new Service1();
-            int idItem = 2;
+            int idItem = 8;
             int cupo = 1;
             float monto = 20;
             try {
+                result.ConsultarDatosItem(idItem,ref cupo,ref monto);
+                Assert.Fail("El item " + idItem + "no se encuentra registrado en el sistema");
 
             }
-            catch(Exception ex){
+            catch(ConsultarException ex){
+                throw ex;
+            }
+        }
+
+        /*[TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El item no se encuentra registrado en el sistema")]
+        public void PruebaConsultarDatosItem_Fallo_Cupo() {
+            Service1 result = new Service1();
+            int idItem = 1;
+            int cupo = 0;
+            float monto = 20;
+            try
+            {
+                result.ConsultarDatosItem(idItem, ref cupo, ref monto);
+                Assert.Fail("El item "+idItem+" no se encuentra registrado en el sistema");
+
+            }
+            catch (ConsultarException ex)
+            {
                 throw ex;
             }
         }*/
