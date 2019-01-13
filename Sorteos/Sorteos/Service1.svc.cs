@@ -274,7 +274,7 @@ namespace Sorteos
             }
         }
 
-        /*
+        /**
          * Metodo: ConsultarApuestas
          * ------------------------------------------------------------------------------
          * Esta función permite consultar el estatus de una apuesta realizada según el
@@ -312,7 +312,7 @@ namespace Sorteos
                 connection.Close();
             }
         }
-        /*
+        /**
          * Método: ConsultarDatosItem
          * ---------------------------------------------------------------------------
          * Este metodo realiza la consulta de los datos tales como cupo y monto segun
@@ -358,7 +358,15 @@ namespace Sorteos
             }
         }
 
-
+        /**
+         * Método: CrearSorteo
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la creacion de un sorteo y lo ingresa a base de datos
+         * @param s: Contiene los datos necesarios para poder crear el sorteo
+         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
+         * un string el cual indica si se inserto exitosamente el sorteo o si no
+         * se pudo insertar
+         */
         public Respuesta CrearSorteo(Sorteo s)
         {
             try
@@ -432,7 +440,16 @@ namespace Sorteos
             }
         }
         
-
+        /**
+         * Método: EliminarSorteo
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la eliminacion de un sorteo y cambia su status de la
+         * base de datos
+         * @param s: Contiene los datos necesarios para poder eliminar el sorteo
+         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
+         * un string el cual indica si se elimino exitosamente el sorteo o si no
+         * se pudo eliminar
+         */
         public Respuesta EliminarSorteo(Sorteo s)
         {
             try
@@ -474,6 +491,17 @@ namespace Sorteos
                 connection.Close();
             }
         }
+
+        /**
+         * Método: ModificarSorteo
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la modificacion de un sorteo y cambia sus datos de la
+         * base de datos
+         * @param s: Contiene los datos necesarios para poder modificar el sorteo
+         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
+         * un string el cual indica si se modifico exitosamente el sorteo o si no
+         * se pudo modificar
+         */
         public Respuesta ModificarSorteo(Sorteo s)
         {
             try
@@ -542,6 +570,17 @@ namespace Sorteos
                 connection.Close();
             }
         }
+
+        /**
+         * Método: ConsultarSorteoxJuego
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la busqueda de todos los sorteos de un juego en la 
+         * base de datos
+         * @param s: Contiene los datos necesarios para poder buscar los sorteos
+         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
+         * un string el cual indica los datos de los sorteos o si hubo un error 
+         * o no se encontro el juego
+         */
         public Respuesta ConsultarSorteoxJuego(Sorteo s)
         {
             try
