@@ -41,9 +41,6 @@ namespace Sorteos
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();
-            prueba
-            prueba
-            prueba
         }*/
 
 
