@@ -20,7 +20,7 @@ namespace PruebasUnitariasSorteos
             sorteo1.ID_JUEGO = 1;
             sorteo1.ID_ITEM = 1;
             sorteo1.HORA = "5:30";
-            sorteo1.DIA = "Lunes";
+            sorteo1.ID_DIA = 1;
             try
             {
                 //Act
@@ -65,7 +65,7 @@ namespace PruebasUnitariasSorteos
             sorteo1.ID_JUEGO = 2;
             sorteo1.ID_ITEM = 1;
             sorteo1.HORA = "3:00";
-            sorteo1.DIA = "Viernes";
+            sorteo1.ID_DIA = 2;
 
             try
             {
@@ -231,11 +231,11 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idSorteo = 1;
-            string dia = "Martes";
+            int idDia = 1;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDia(idSorteo, dia));
+                Assert.AreEqual(1, result.ConsultarDia(idSorteo, idDia));
             }
             catch (Exception e)
             {
@@ -264,12 +264,12 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idSorteo = 1;
-            string dia = "Martes";
+            int idDia = 1;
             string hora = "7:29";
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarHora(idSorteo, hora, dia));
+                Assert.AreEqual(0, result.ConsultarHora(idSorteo, hora, idDia));
             }
             catch (ConsultarException e)
             {

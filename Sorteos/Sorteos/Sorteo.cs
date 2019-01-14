@@ -23,7 +23,7 @@ namespace Sorteos
         public string HORA { get; set; }
 
         [DataMember]
-        public string DIA { get; set; }
+        public int ID_DIA { get; set; }
 
     }
 }
