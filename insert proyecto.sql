@@ -1,3 +1,4 @@
+USE `proyecto` ;
 /*PRIMER METODO DE PRUEBA (ConsultarApuesta)*/
 /*Insertar en TIPOJUEGO algo para probar*/
 INSERT INTO TB_TIPOJUEGO values (1,'a','a',1);
@@ -27,6 +28,8 @@ INSERT INTO TB_TICKET values(1,1,'algo','2019-1-10',1,20,'2019-1-10',20);
 /*Insertar en SORTEO el JUEGO*/
 INSERT INTO TB_SORTEO values(1,1,'7:29',1);
 
+INSERT INTO TB_SORTEO_ITEM values(1,1,1,1,20,1);
+
 /*------------------------------------------------------------*/
 
 /*Insertar en ITEM el JUEGO*/
@@ -40,6 +43,7 @@ INSERT INTO TB_JUGADA values(1,1,1,1,1,1,'500',1);
 /*SEGUNDO METODO DE PRUEBA (ConsultarDia)*/
 /*Insertar DIA*/
 INSERT INTO TB_DIA values(1,'Martes',1);
+INSERT INTO TB_DIA values(2,'Lunes',1);
 
 /*Insertar en DIA_SORTEO el DIA*/
 INSERT INTO TB_DIA_SORTEO values (1,1,1,1);
