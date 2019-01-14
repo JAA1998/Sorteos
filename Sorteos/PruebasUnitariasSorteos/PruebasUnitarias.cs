@@ -144,10 +144,11 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idItem = 1;
+            int idJuego = 1;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarItem(idItem));
+                Assert.AreEqual(1, result.ConsultarItem(idItem, idJuego));
             }
             catch (ConsultarException e)
             {
@@ -162,10 +163,11 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idItem = 0;
+            int idJuego = 0;
 
             try
             {
-                result.ConsultarItem(idItem);
+                result.ConsultarItem(idItem, idJuego);
                 Assert.Fail();
             }
             catch (ConsultarException e)
@@ -183,7 +185,7 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarItem(idSorteo));
+                Assert.AreEqual(1, result.ConsultarSorteo(idSorteo));
             }
             catch (ConsultarException e)
             {
@@ -227,7 +229,7 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarDia_Exito()
+        public void PruebaConsultarDiaHora_Exito()
         {
             Service1 result = new Service1();
             int idSorteo = 1;
@@ -235,7 +237,7 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDia(idSorteo, idDia));
+                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia));
             }
             catch (Exception e)
             {
@@ -245,13 +247,13 @@ namespace PruebasUnitariasSorteos
         }
 
         /*[TestMethod]
-        public void PruebaConsultarDia_Fallo_idSorteo() {
+        public void PruebaConsultarDiaHora_Fallo_idSorteo() {
             Service1 result = new Service1();
             int idSorteo = 1;
             string dia = "Martes";
             try
             {
-                Assert.AreEqual(1, result.ConsultarDia(idSorteo, dia));
+                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, dia));
             }
             catch (Exception e)
             {

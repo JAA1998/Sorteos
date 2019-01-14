@@ -9,40 +9,18 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using Sorteos;
-using WCF;
 
 namespace Sorteos
 {
     public class Service1 : IService1
     {
         MySqlConnection connection;
-        //MySqlConnectionStringBuilder builder;
+        string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
 
         public Service1()
         {
-            /*
-            builder = new MySqlConnectionStringBuilder();
-            builder.Server = "127.0.0.1";
-            builder.Port = 3306;
-            builder.UserID = "root";
-            builder.Password = "ve26573051";
-            builder.Database = "proyecto";*/
-            string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
             connection = new MySqlConnection(cx);
         }
-        /**
-         * Método: Conectar
-         * ---------------------------------------------------------------------------
-         * Esta funcion realiza la conexion a la base de datos
-         * @param query: query de ejecuion sobre la base de datos
-         * @return: retorna la validez de la ejecución del query en la base de datos
-         */
-        /*public int Conectar(string query)
-        {
-            MySqlCommand command = new MySqlCommand(query, connection);
-            return command.ExecuteNonQuery();
-        }*/
-
 
         /**
          * Método: ConsultarJuego
@@ -72,7 +50,7 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El juego no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El juego " + idJuego + " no se encuentra registrado en el sistema");
                 }
                 
             }
@@ -89,23 +67,24 @@ namespace Sorteos
           * @return: retorna 1 si se logra obtener el item
           * @return: retorna 0 si ocurre un error
           */
-        public int ConsultarItem(int idItem)
+        public int ConsultarItem(int idItem, int idJuego)
         {
             try
             {
-                string query = "SELECT ESTATUS FROM TB_ITEM WHERE ID_ITEM=" + idItem;
-                int result = 0;
+                string query = "SELECT ESTATUS, ID_JUEGO FROM TB_ITEM WHERE ID_ITEM=" + idItem;
+                int result1 = 0, result2 = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
                 connection.Open();
                 reader = command.ExecuteReader();
                 while (reader.Read()) {
-                    result = reader.GetInt16(0);
+                    result1 = reader.GetInt16(0);
+                    result2 = reader.GetInt32(1);
                 }
-                if (result == 1) return 1;
+                if (result1 == 1 && result2 == idJuego) return 1;
                 else
                 {
-                    throw new ConsultarException("El item no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El item " + idItem + " no se encuentra registrado en el sistema o no pertenece al juego " + idJuego);
                 }
             }
             finally
@@ -141,7 +120,44 @@ namespace Sorteos
                 if (result == 1) return 1;
                 else
                 {
-                    throw new ConsultarException("El sorteo " + idSorteo + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El sorteo " + idSorteo + " no se encuentra registrado en el sistema");
+                }
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /**
+          * Metodo: ConsultarDia
+          * -----------------------------------------------------------------
+          * Esta funcion permite consultar el estatus de un dia
+          * @param idDia: Identificador del dia que se quiere consultar
+          * @return: retorna 1 si se logra obtener el dia
+          * @return: retorna 0 si ocurre un error o no se encontro
+          */
+        public int ConsultarDia(int idDia)
+        {
+            try
+            {
+                string query = "SELECT ESTATUS FROM TB_DIA WHERE ID_DIA=" + idDia;
+                int result = 0;
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader;
+
+                connection.Open();
+
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result = reader.GetInt16(0);
+                }
+                if (result == 1) return 1;
+                else
+                {
+                    throw new ConsultarException("El dia " + idDia + " no se encuentra registrado en el sistema");
                 }
 
             }
@@ -164,10 +180,8 @@ namespace Sorteos
         {
             try
             {
-                string query1 = "SELECT ESTATUS FROM TB_SORTEO WHERE (ID_SORTEO = " + idSorteo + ")";
-                string query2 = "AND ID_JUEGO = " + idJuego;
-                string query = String.Concat(query1, query2);
-                int result =0;
+                string query = "SELECT ESTATUS, ID_JUEGO FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo;
+                int result1 = 0, result2 = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
@@ -176,12 +190,13 @@ namespace Sorteos
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result = reader.GetInt16(0);
+                    result1 = reader.GetInt16(0);
+                    result2 = reader.GetInt16(1);
                 }
-                if (result == 1) return 1;
+                if (result1 == 1 && result2 == idJuego) return 1;
                 else
                 {
-                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego ");
+                    throw new ConsultarException("El sorteo que intenta actualizar no se encuentra registrado o no pertenece al juego " + idJuego);
                 }
 
             }
@@ -192,7 +207,7 @@ namespace Sorteos
         }
 
         /**
-          * Metodo: ConsultarDia
+          * Metodo: ConsultarDiaHora
           * ------------------------------------------------------------------
           * Esta funcion permite consultar el dia de un sorteo y verificar si
           * es igual al dia que se le pasa como parametro
@@ -201,7 +216,7 @@ namespace Sorteos
           * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
           * @return: retorna 1 si ocurre un error o no son iguales
           */
-        public int ConsultarDia(int idSorteo, int idDia)
+        public int ConsultarDiaHora(int idSorteo, int idDia)
         {
             try
             {
@@ -259,9 +274,9 @@ namespace Sorteos
                     result3 = reader.GetString(2);
                     if (string.Equals(result2, hora) && Convert.ToInt32(result1) == 1)
                     {
-                        if (ConsultarDia(Convert.ToInt32(result1), idDia) == 1)
+                        if (ConsultarDiaHora(Convert.ToInt32(result1), idDia) == 1)
                         {
-                            throw new ConsultarException("El sorteo de hora" + hora + " para el día" + idDia + " del juego" + idJuego + " ya se encuentra registrado en el sistema");
+                            throw new ConsultarException("El sorteo de hora " + hora + " para el día " + idDia + " del juego " + idJuego + " ya se encuentra registrado en el sistema");
                         }
                     }
                 }
@@ -300,11 +315,11 @@ namespace Sorteos
                 }
                 if (result == 1)
                 {
-                    return 1;
+                    throw new ConsultarException("El sorteo que intenta eliminar tiene apuestas activas asociadas"); 
                 }
                 else
                 {
-                    throw new ConsultarException("El sorteo que intenta eliminar tiene apuestas activas asociadas");
+                    return 1;
                 }
             }
             finally
@@ -349,7 +364,7 @@ namespace Sorteos
                 }
                 else
                 {
-                    throw new ConsultarException("El item " + idItem + "no se encuentra registrado en el sistema");
+                    throw new ConsultarException("El item " + idItem + " no se encuentra registrado en el sistema");
                 }
             }
             finally
@@ -372,11 +387,11 @@ namespace Sorteos
             try
             {
 
-                if (s.ID_JUEGO.ToString().Length == 0)
+                if (s.ID_JUEGO == 0)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }
-                if (s.ID_ITEM.ToString().Length == 0)
+                if (s.ID_ITEM == 0)
                 {
                     throw new ParameterException("ID_ITEM");
                 }
@@ -384,33 +399,34 @@ namespace Sorteos
                 {
                     throw new ParameterException("HORA");
                 }
-                else if (s.ID_DIA.ToString().Length == 0)
+                else if (s.ID_DIA == 0)
                 {
                     throw new ParameterException("ID_DIA");
                 }
 
                 ConsultarJuego(s.ID_JUEGO);
-                ConsultarItem(s.ID_ITEM);
+                ConsultarItem(s.ID_ITEM, s.ID_JUEGO);
+                ConsultarDia(s.ID_DIA);
                 ConsultarHora(s.ID_JUEGO, s.HORA, s.ID_DIA);
 
                 int result, cupo = 0;
                 float monto = 0;
                 string query;
+                ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto);
+
                 MySqlCommand command;
                 connection.Open();
 
-                query = "INSERT INTO TB_SORTEO (ID_SORTEO, ID_JUEGO, HORA, ESTATUS) VALUES (NULL, '" + s.ID_JUEGO + "', '" + s.HORA + "', " + 1 + ")";
+                query = "INSERT INTO TB_SORTEO (ID_SORTEO, ID_JUEGO, HORA, ESTATUS) VALUES (NULL, " + s.ID_JUEGO + ", '" + s.HORA + "', " + 1 + "); SELECT LAST_INSERT_ID()";
+                command = new MySqlCommand(query, connection);
+
+                int ID_SORTEO = Convert.ToInt32(command.ExecuteScalar());
+
+                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEOITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, " + s.ID_ITEM + ", " + ID_SORTEO + ", " + cupo + ", " + monto + ", " + 1 + ")";
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
-                string ID_SORTEO = "SELECT DISTINCT LAST_INSERT_ID() FROM TB_SORTEO";
-                ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto);
-
-                query = "INSERT INTO TB_SORTEO_ITEM (ID_SORTEO_ITEM, ID_ITEM, ID_SORTEO, CUPO, MONTO, ESTATUS) VALUES (NULL, '" + s.ID_ITEM + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + cupo + "', " + monto + "', " + 1 + ")";
-                command = new MySqlCommand(query, connection);
-                result = command.ExecuteNonQuery();
-
-                query = "INSERT INTO TB_DIA_SORTEO (ID_DIASORTEO, ID_DIA, ID_SORTEO, ESTATUS) VALUES (NULL, '" + s.ID_DIA + "', '" + Convert.ToInt32(ID_SORTEO) + "', " + 1 + ")";
+                query = "INSERT INTO TB_DIA_SORTEO (ID_DIASORTEO, ID_DIA, ID_SORTEO, ESTATUS) VALUES (NULL, " + s.ID_DIA + ", " + ID_SORTEO + ", " + 1 + ")";
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
@@ -449,7 +465,7 @@ namespace Sorteos
             try
             {
 
-                if (s.ID_SORTEO.ToString().Length == 0)
+                if (s.ID_SORTEO == 0)
                 {
                     throw new ParameterException("ID_SORTEO");
                 }
@@ -500,15 +516,15 @@ namespace Sorteos
         {
             try
             {
-                if (s.ID_SORTEO.ToString().Length == 0)
+                if (s.ID_SORTEO == 0)
                 {
                     throw new ParameterException("ID_SORTEO");
                 }
-                if (s.ID_JUEGO.ToString().Length == 0)
+                if (s.ID_JUEGO == 0)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }
-                if (s.ID_ITEM.ToString().Length == 0)
+                if (s.ID_ITEM == 0)
                 {
                     throw new ParameterException("ID_ITEM");
                 }
@@ -516,33 +532,34 @@ namespace Sorteos
                 {
                     throw new ParameterException("HORA");
                 }
-                else if (s.ID_DIA.ToString().Length == 0)
+                else if (s.ID_DIA == 0)
                 {
                     throw new ParameterException("ID_DIA");
                 }
 
                 ConsultarJuego(s.ID_JUEGO);
-                ConsultarItem(s.ID_ITEM);
+                ConsultarItem(s.ID_ITEM, s.ID_JUEGO);
+                ConsultarDia(s.ID_DIA);
                 ConsultarSJ(s.ID_SORTEO, s.ID_JUEGO);
                 ConsultarHora(s.ID_JUEGO, s.HORA, s.ID_DIA);
 
-                MySqlCommand command;
-                connection.Open();
                 int result, cupo = 0;
                 float monto = 0;
                 string query;
-
-                query = "UPDATE TB_SORTEO SET ID_JUEGO='" + s.ID_JUEGO + "', HORA='" + s.HORA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
-                command = new MySqlCommand(query, connection);
-                result = command.ExecuteNonQuery();
-
                 ConsultarDatosItem(s.ID_ITEM, ref cupo, ref monto);
 
-                query = "UPDATE TB_SORTEO_ITEM SET ID_ITEM='" + s.ID_ITEM + "', CUPO='" + cupo + "', MONTO='" + monto + " WHERE ID_SORTEO=" + s.ID_SORTEO;
+                MySqlCommand command;
+                connection.Open();
+
+                query = "UPDATE TB_SORTEO SET ID_JUEGO=" + s.ID_JUEGO + ", HORA='" + s.HORA + "' WHERE ID_SORTEO=" + s.ID_SORTEO;
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
-                query = "UPDATE TB_DIA_SORTEO ID_DIA='" + s.ID_DIA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
+                query = "UPDATE TB_SORTEO_ITEM SET ID_ITEM=" + s.ID_ITEM + ", CUPO=" + cupo + ", MONTO=" + monto + " WHERE ID_SORTEO=" + s.ID_SORTEO;
+                command = new MySqlCommand(query, connection);
+                result = command.ExecuteNonQuery();
+
+                query = "UPDATE TB_DIA_SORTEO SET ID_DIA=" + s.ID_DIA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
