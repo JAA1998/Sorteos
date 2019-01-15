@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sorteos;
 
@@ -20,17 +21,15 @@ namespace PruebasUnitariasSorteos
             sorteo1.ID_JUEGO = 1;
             sorteo1.ID_ITEM = 1;
             sorteo1.HORA = "05:30:00";
-            sorteo1.ID_DIA = 1;
+            sorteo1.ID_DIA = new List<int> { 1 };
+
             Service1 result = new Service1();
             try
             {
                 //Act
-
-                //Respuesta expected = new Respuesta("Sorteo Creado Exitosamente");
+                Respuesta expected = new Respuesta("Sorteo Creado Exitosamente");
                 //Assert
-                //Assert.AreEqual(expected, result.CrearSorteo(sorteo1));
-                Assert.AreEqual(0, result.CrearSorteo(sorteo1));
-
+                Assert.AreEqual(expected.Mensaje, result.CrearSorteo(sorteo1).Mensaje);
             }
             catch (Exception e)
             {
@@ -41,19 +40,18 @@ namespace PruebasUnitariasSorteos
         public void PruebaEliminarSorteo()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 0;
+            sorteo1.ID_SORTEO = 3;
 
             try
             {
                 Service1 result = new Service1();
                 Respuesta expected = new Respuesta("Eliminado exitosamente");
 
-                Assert.AreEqual(expected, result.EliminarSorteo(sorteo1));
+                Assert.AreEqual(expected.Mensaje, result.EliminarSorteo(sorteo1).Mensaje);
 
             }
             catch (ConsultarException e)
             {
-
                 throw e;
             }
         }
@@ -63,23 +61,22 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 5;
-            sorteo1.ID_JUEGO = 6;
-            sorteo1.ID_ITEM = 5;
+            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 3;
             sorteo1.HORA = "3:00";
-            sorteo1.ID_DIA = 6;
+            sorteo1.ID_DIA = new List<int> { 2 };
 
             try
             {
                 Service1 result = new Service1();
                 Respuesta expected = new Respuesta("Actualizado Exitosamente");
 
-                Assert.AreEqual(expected, result.ModificarSorteo(sorteo1));
+                Assert.AreEqual(expected.Mensaje, result.ModificarSorteo(sorteo1).Mensaje);
 
             }
             catch (ConsultarException e)
             {
-
                 throw e;
             }
         }
@@ -197,6 +194,59 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El sorteo no se encuentra registrado en el sistema")]
+        public void PruebaConsultarSorteo_Fallo()
+        {
+            Service1 result = new Service1();
+            int idSorteo = 100;
+
+            try
+            {
+                result.ConsultarSorteo(idSorteo);
+                Assert.Fail();
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarDia_Exito()
+        {
+            Service1 result = new Service1();
+            int idDia = 1;
+
+            try
+            {
+                Assert.AreEqual(1, result.ConsultarDia(idDia));
+            }
+            catch (ConsultarException e)
+            {
+
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El dia no se encuentra registrado en el sistema")]
+        public void PruebaConsultarDia_Fallo()
+        {
+            Service1 result = new Service1();
+            int idDia = 3;
+
+            try
+            {
+                result.ConsultarDia(idDia);
+                Assert.Fail();
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
         public void PruebaConsultarSJ_Exito()
         {
             Service1 result = new Service1();
@@ -236,26 +286,32 @@ namespace PruebasUnitariasSorteos
             Service1 result = new Service1();
             int idSorteo = 1;
             int idDia = 1;
+            int idJuego = 1;
+            string hora = "02:30:00";
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarDiaHora(idSorteo, idDia, 0));
+                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia, hora, idJuego));
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConsultarException), "El sorteo de hora especificada para el día especificado del juego especificado ya se encuentra registrado en el sistema")]
         public void PruebaConsultarDiaHora_Fallo_idSorteo() {
             Service1 result = new Service1();
             int idSorteo = 1;
             int idDia = 2;
+            int idJuego = 1;
+            string hora = "02:30:00";
+
             try
             {
-                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia, 0));
+                result.ConsultarDiaHora(idSorteo, idDia, hora, idJuego);
+                Assert.Fail();
             }
             catch (Exception e)
             {
@@ -268,12 +324,12 @@ namespace PruebasUnitariasSorteos
         {
             Service1 result = new Service1();
             int idJuego = 1;
-            int idDia = 4;
-            string hora = "02:30:00";
+            string hora = "01:00:00";
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarHora(idJuego, hora, idDia));
+                List<int> lista = new List<int>();
+                CollectionAssert.AreEqual(lista, result.ConsultarHora(idJuego, hora));
             }
             catch (ConsultarException e)
             {
@@ -283,19 +339,17 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        //[ExpectedException(typeof(ConsultarException), "El sorteo de hora especificada para el día especificado del juego especificado ya se encuentra registrado en el sistema")]
         public void PruebaConsultarHora_Fallo()
         {
             Service1 result = new Service1();
             int idJuego = 1;
-            int idDia = 2;
-            string hora = "02:30:00";
+            string hora = "02:00:00";
 
             try
             {
-                //result.ConsultarHora(idJuego, hora, idDia);
-                //Assert.Fail();
-                Assert.AreEqual(0, result.ConsultarHora(idJuego, hora, idDia));
+                List<int> lista = new List<int>();
+                lista.Add(2);
+                CollectionAssert.AreEqual(lista, result.ConsultarHora(idJuego, hora));
             }
             catch (ConsultarException e)
             {

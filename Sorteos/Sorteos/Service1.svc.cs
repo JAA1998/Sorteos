@@ -53,7 +53,7 @@ namespace Sorteos
 
                 while (reader.Read())
                 {
-                    result = reader.GetInt16(0);
+                    result = reader.GetInt32(0);
                 }
                 if (result == 1) return 1;
                 else
@@ -86,7 +86,7 @@ namespace Sorteos
                 connection.Open();
                 reader = command.ExecuteReader();
                 while (reader.Read()) {
-                    result1 = reader.GetInt16(0);
+                    result1 = reader.GetInt32(0);
                     result2 = reader.GetInt32(1);
                 }
                 if (result1 == 1 && result2 == idJuego) return 1;
@@ -123,7 +123,7 @@ namespace Sorteos
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result = reader.GetInt16(0);
+                    result = reader.GetInt32(0);
                 }
                 if (result == 1) return 1;
                 else
@@ -160,7 +160,7 @@ namespace Sorteos
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result = reader.GetInt16(0);
+                    result = reader.GetInt32(0);
                 }
                 if (result == 1) return 1;
                 else
@@ -198,8 +198,8 @@ namespace Sorteos
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result1 = reader.GetInt16(0);
-                    result2 = reader.GetInt16(1);
+                    result1 = reader.GetInt32(0);
+                    result2 = reader.GetInt32(1);
                 }
                 if (result1 == 1 && result2 == idJuego) return 1;
                 else
@@ -224,32 +224,30 @@ namespace Sorteos
           * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
           * @return: retorna 1 si ocurre un error o no son iguales
           */
-        public int ConsultarDiaHora(int idSorteo, int idDia, int con)
+        public int ConsultarDiaHora(int idSorteo, int idDia, string hora, int idJuego)
         {
             try
             {
                 string query = "SELECT ID_DIA FROM TB_DIA_SORTEO WHERE ID_SORTEO=" + idSorteo;
-                string result = string.Empty;
+                int result = 0;
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
-                if (con == 0)
-                    connection.Open();
+                connection.Open();
 
                 reader = command.ExecuteReader();
 
                 while (reader.Read()) {
-                    result = reader.GetString(0);
+                    result = reader.GetInt32(0);
                 }
-                if (Convert.ToInt32(result) == idDia)
-                    return 1;
-                else return 0;
+                if (result == idDia)
+                    throw new ConsultarException("El sorteo de hora " + hora + " para el día " + idDia + " del juego " + idJuego + " ya se encuentra registrado en el sistema");
+                else return 1;
                 
             }
             finally
             {
-                if (con == 0)
-                    connection.Close();
+                connection.Close();
             }
         }
 
@@ -264,12 +262,14 @@ namespace Sorteos
           * @return: retorna 0 ya existe un sorteo en esa hora 
           * @return: retorna 1 si ocurre un error o no existe un sorteo a esa hora
           */
-        public int ConsultarHora(int idJuego, string hora, int idDia)
+        public List<int> ConsultarHora(int idJuego, string hora)
         {
             try
             {
                 string query = "SELECT ID_SORTEO, HORA, ESTATUS FROM TB_SORTEO WHERE ID_JUEGO=" + idJuego;
-                string result1 = string.Empty, result2 = string.Empty, result3 = string.Empty; ;
+                string result2 = string.Empty;
+                int result1 = 0, result3 = 0;
+                List<int> listaSorteos = new List<int>();
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
@@ -279,25 +279,17 @@ namespace Sorteos
 
                 while (reader.Read())
                 {
-
-                    result1 = reader.GetString(0);
+                    result1 = reader.GetInt32(0);
                     result2 = reader.GetString(1);
-                    result3 = reader.GetString(2);
+                    result3 = reader.GetInt32(2);
         
-                    if (string.Equals(result2, hora) && Convert.ToInt32(result3) == 1)
+                    if (string.Equals(result2, hora) && result3 == 1)
                     {
-                        //reader.Close();
-                        if (ConsultarDiaHora(Convert.ToInt32(result1), idDia, 1) == 1)
-                        {
-                            return 0;
-                            //throw new ConsultarException("El sorteo de hora especificada para el día especificado del juego especificado ya se encuentra registrado en el sistema");
-                        }
-                        
-                        
+                        listaSorteos.Add(result1);
                     }
                 }
-                return 1;
-                
+
+                return listaSorteos;
             }
             finally
             {
@@ -327,7 +319,7 @@ namespace Sorteos
 
                 while (reader.Read())
                 {
-                    result = reader.GetInt16(0);
+                    result = reader.GetInt32(0);
                 }
                 if (result == 1)
                 {
@@ -368,7 +360,7 @@ namespace Sorteos
 
                 while (reader.Read())
                 {
-                    result1 = reader.GetInt16(0);
+                    result1 = reader.GetInt32(0);
                     result2 = reader.GetFloat(1);
                         
                 }
@@ -398,7 +390,7 @@ namespace Sorteos
          * un string el cual indica si se inserto exitosamente el sorteo o si no
          * se pudo insertar
          */
-        public int CrearSorteo(Sorteo s)
+        public Respuesta CrearSorteo(Sorteo s)
         {
             try
             {
@@ -411,19 +403,32 @@ namespace Sorteos
                 {
                     throw new ParameterException("ID_ITEM");
                 }
-                else if (s.HORA.Length == 0)
+                if (s.HORA.Length == 0)
                 {
                     throw new ParameterException("HORA");
                 }
-                else if (s.ID_DIA == 0)
+                if (s.ID_DIA == null || s.ID_DIA.Count == 0)
                 {
                     throw new ParameterException("ID_DIA");
                 }
 
                 ConsultarJuego(s.ID_JUEGO);
                 ConsultarItem(s.ID_ITEM, s.ID_JUEGO);
-                ConsultarDia(s.ID_DIA);
-                ConsultarHora(s.ID_JUEGO, s.HORA, s.ID_DIA);
+                foreach (int idDia in s.ID_DIA)
+                {
+                    ConsultarDia(idDia);
+                }
+                List<int> sorteosHora = ConsultarHora(s.ID_JUEGO, s.HORA);
+                if (sorteosHora == null || sorteosHora.Count == 0)
+                { 
+                    foreach (int h in sorteosHora)
+                    {
+                        foreach (int idDia in s.ID_DIA)
+                        {
+                            ConsultarDiaHora(h, idDia, s.HORA, s.ID_JUEGO);
+                        }
+                    }
+                }
 
                 int result, cupo = 0;
                 float monto = 0;
@@ -442,14 +447,16 @@ namespace Sorteos
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
-                query = "INSERT INTO TB_DIA_SORTEO (ID_DIASORTEO, ID_DIA, ID_SORTEO, ESTATUS) VALUES (NULL, " + s.ID_DIA + ", " + ID_SORTEO + ", " + 1 + ")";
-                command = new MySqlCommand(query, connection);
-                result = command.ExecuteNonQuery();
+                foreach (int idDia in s.ID_DIA)
+                {
+                    query = "INSERT INTO TB_DIA_SORTEO (ID_DIASORTEO, ID_DIA, ID_SORTEO, ESTATUS) VALUES (NULL, " + idDia + ", " + ID_SORTEO + ", " + 1 + ")";
+                    command = new MySqlCommand(query, connection);
+                    result = command.ExecuteNonQuery();
+                }
 
                 if (result == 1)
                 {
-                    return 0;
-                    //return new Respuesta("Sorteo Creado Exitosamente");
+                    return new Respuesta("Sorteo Creado Exitosamente");
                 }
                 else
                 {
@@ -459,9 +466,7 @@ namespace Sorteos
             }
             catch (Exception e)
             {
-                Console.Write(e);
-                return 1;
-                //return new Respuesta("Error: "+ e.Message);
+                return new Respuesta("Error: "+ e.Message);
             }
             finally
             {
@@ -547,20 +552,33 @@ namespace Sorteos
                 {
                     throw new ParameterException("ID_ITEM");
                 }
-                else if (s.HORA.Length == 0)
+                if (s.HORA.Length == 0)
                 {
                     throw new ParameterException("HORA");
                 }
-                else if (s.ID_DIA == 0)
+                if (s.ID_DIA == null || s.ID_DIA.Count == 0)
                 {
                     throw new ParameterException("ID_DIA");
                 }
 
                 ConsultarJuego(s.ID_JUEGO);
                 ConsultarItem(s.ID_ITEM, s.ID_JUEGO);
-                ConsultarDia(s.ID_DIA);
                 ConsultarSJ(s.ID_SORTEO, s.ID_JUEGO);
-                ConsultarHora(s.ID_JUEGO, s.HORA, s.ID_DIA);
+                foreach (int idDia in s.ID_DIA)
+                {
+                    ConsultarDia(idDia);
+                }
+                List<int> sorteosHora = ConsultarHora(s.ID_JUEGO, s.HORA);
+                if (sorteosHora == null || sorteosHora.Count == 0)
+                {
+                    foreach (int h in sorteosHora)
+                    {
+                        foreach (int idDia in s.ID_DIA)
+                        {
+                            ConsultarDiaHora(h, idDia, s.HORA, s.ID_JUEGO);
+                        }
+                    }
+                }
 
                 int result, cupo = 0;
                 float monto = 0;
@@ -578,13 +596,16 @@ namespace Sorteos
                 command = new MySqlCommand(query, connection);
                 result = command.ExecuteNonQuery();
 
-                query = "UPDATE TB_DIA_SORTEO SET ID_DIA=" + s.ID_DIA + " WHERE ID_SORTEO=" + s.ID_SORTEO;
-                command = new MySqlCommand(query, connection);
-                result = command.ExecuteNonQuery();
+                foreach (int idDia in s.ID_DIA)
+                {
+                    query = "UPDATE TB_DIA_SORTEO SET ID_DIA=" + idDia + " WHERE ID_SORTEO=" + s.ID_SORTEO;
+                    command = new MySqlCommand(query, connection);
+                    result = command.ExecuteNonQuery();
+                }
 
                 if (result == 1)
                 {
-                    return new Respuesta("Actualizado exitosamente");
+                    return new Respuesta("Actualizado Exitosamente");
                 }
                 else
                 {
@@ -616,7 +637,7 @@ namespace Sorteos
             try
             {
 
-                if (s.ID_JUEGO.ToString().Length == 0)
+                if (s.ID_JUEGO == 0)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }
