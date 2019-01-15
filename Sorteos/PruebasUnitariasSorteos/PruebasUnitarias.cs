@@ -12,22 +12,24 @@ namespace PruebasUnitariasSorteos
 
 
         [TestMethod]
-        public void PruebaCrearSorteo()
+
+        public void PruebaCrearSorteo_Exito()
         {
             //Arrange
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 2;
             sorteo1.ID_JUEGO = 1;
             sorteo1.ID_ITEM = 1;
-            sorteo1.HORA = "5:30";
+            sorteo1.HORA = "05:30:00";
             sorteo1.ID_DIA = 1;
+            Service1 result = new Service1();
             try
             {
                 //Act
-                Service1 result = new Service1();
-                Respuesta expected = new Respuesta("Sorteo Creado Exitosamente");
+
+                //Respuesta expected = new Respuesta("Sorteo Creado Exitosamente");
                 //Assert
-                Assert.AreEqual(expected, result.CrearSorteo(sorteo1));
+                //Assert.AreEqual(expected, result.CrearSorteo(sorteo1));
+                Assert.AreEqual(0, result.CrearSorteo(sorteo1));
 
             }
             catch (Exception e)
@@ -61,11 +63,11 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_JUEGO = 2;
-            sorteo1.ID_ITEM = 1;
+            sorteo1.ID_SORTEO = 5;
+            sorteo1.ID_JUEGO = 6;
+            sorteo1.ID_ITEM = 5;
             sorteo1.HORA = "3:00";
-            sorteo1.ID_DIA = 2;
+            sorteo1.ID_DIA = 6;
 
             try
             {
@@ -237,7 +239,7 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia));
+                Assert.AreEqual(0, result.ConsultarDiaHora(idSorteo, idDia, 0));
             }
             catch (Exception e)
             {
@@ -246,32 +248,54 @@ namespace PruebasUnitariasSorteos
             }
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void PruebaConsultarDiaHora_Fallo_idSorteo() {
             Service1 result = new Service1();
             int idSorteo = 1;
-            string dia = "Martes";
+            int idDia = 2;
             try
             {
-                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, dia));
+                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia, 0));
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }*/
+        }
 
         [TestMethod]
         public void PruebaConsultarHora_Exito()
         {
             Service1 result = new Service1();
-            int idSorteo = 1;
-            int idDia = 1;
-            string hora = "7:29";
+            int idJuego = 1;
+            int idDia = 4;
+            string hora = "02:30:00";
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarHora(idSorteo, hora, idDia));
+                Assert.AreEqual(1, result.ConsultarHora(idJuego, hora, idDia));
+            }
+            catch (ConsultarException e)
+            {
+
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        //[ExpectedException(typeof(ConsultarException), "El sorteo de hora especificada para el día especificado del juego especificado ya se encuentra registrado en el sistema")]
+        public void PruebaConsultarHora_Fallo()
+        {
+            Service1 result = new Service1();
+            int idJuego = 1;
+            int idDia = 2;
+            string hora = "02:30:00";
+
+            try
+            {
+                //result.ConsultarHora(idJuego, hora, idDia);
+                //Assert.Fail();
+                Assert.AreEqual(0, result.ConsultarHora(idJuego, hora, idDia));
             }
             catch (ConsultarException e)
             {
@@ -284,11 +308,11 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarApuestas_Exito()
         {
             Service1 result = new Service1();
-            int idSorteo = 1;
+            int idSorteo = 2;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarApuestas(idSorteo));
+                Assert.AreEqual(0, result.ConsultarApuestas(idSorteo));
             }
             catch (ConsultarException ex)
             {
@@ -301,7 +325,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarApuestas_Fallo()
         {
             Service1 result = new Service1();
-            int idSorteo = 2;
+            int idSorteo = 1;
             try
             {
                 result.ConsultarApuestas(idSorteo);

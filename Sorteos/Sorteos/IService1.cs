@@ -16,7 +16,7 @@ namespace Sorteos
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/CrearSorteo", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Respuesta CrearSorteo(Sorteo s);
+        int CrearSorteo(Sorteo s);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/ConsultarSorteoxJuego", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]

@@ -15,11 +15,19 @@ namespace Sorteos
     public class Service1 : IService1
     {
         MySqlConnection connection;
-        string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+        MySqlConnectionStringBuilder builder;
 
         public Service1()
         {
-            connection = new MySqlConnection(cx);
+            builder = new MySqlConnectionStringBuilder();
+            builder.Server = "127.0.0.1";
+            builder.Port = 3306;
+            builder.UserID = "root";
+            builder.Password = "jalejandro541";
+            builder.Database = "proyecto";
+            //string cx = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+
+            connection = new MySqlConnection(builder.ToString());
         }
 
         /**
@@ -216,7 +224,7 @@ namespace Sorteos
           * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
           * @return: retorna 1 si ocurre un error o no son iguales
           */
-        public int ConsultarDiaHora(int idSorteo, int idDia)
+        public int ConsultarDiaHora(int idSorteo, int idDia, int con)
         {
             try
             {
@@ -225,7 +233,8 @@ namespace Sorteos
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader;
 
-                connection.Open();
+                if (con == 0)
+                    connection.Open();
 
                 reader = command.ExecuteReader();
 
@@ -239,7 +248,8 @@ namespace Sorteos
             }
             finally
             {
-                connection.Close();
+                if (con == 0)
+                    connection.Close();
             }
         }
 
@@ -269,15 +279,21 @@ namespace Sorteos
 
                 while (reader.Read())
                 {
+
                     result1 = reader.GetString(0);
                     result2 = reader.GetString(1);
                     result3 = reader.GetString(2);
-                    if (string.Equals(result2, hora) && Convert.ToInt32(result1) == 1)
+        
+                    if (string.Equals(result2, hora) && Convert.ToInt32(result3) == 1)
                     {
-                        if (ConsultarDiaHora(Convert.ToInt32(result1), idDia) == 1)
+                        //reader.Close();
+                        if (ConsultarDiaHora(Convert.ToInt32(result1), idDia, 1) == 1)
                         {
-                            throw new ConsultarException("El sorteo de hora " + hora + " para el día " + idDia + " del juego " + idJuego + " ya se encuentra registrado en el sistema");
+                            return 0;
+                            //throw new ConsultarException("El sorteo de hora especificada para el día especificado del juego especificado ya se encuentra registrado en el sistema");
                         }
+                        
+                        
                     }
                 }
                 return 1;
@@ -319,7 +335,7 @@ namespace Sorteos
                 }
                 else
                 {
-                    return 1;
+                    return 0;
                 }
             }
             finally
@@ -382,7 +398,7 @@ namespace Sorteos
          * un string el cual indica si se inserto exitosamente el sorteo o si no
          * se pudo insertar
          */
-        public Respuesta CrearSorteo(Sorteo s)
+        public int CrearSorteo(Sorteo s)
         {
             try
             {
@@ -432,7 +448,8 @@ namespace Sorteos
 
                 if (result == 1)
                 {
-                    return new Respuesta("Sorteo Creado Exitosamente");
+                    return 0;
+                    //return new Respuesta("Sorteo Creado Exitosamente");
                 }
                 else
                 {
@@ -442,7 +459,9 @@ namespace Sorteos
             }
             catch (Exception e)
             {
-                return new Respuesta("Error: "+ e.Message);
+                Console.Write(e);
+                return 1;
+                //return new Respuesta("Error: "+ e.Message);
             }
             finally
             {
