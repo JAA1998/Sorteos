@@ -13,7 +13,6 @@ namespace PruebasUnitariasSorteos
 
 
         [TestMethod]
-
         public void PruebaCrearSorteo_Exito()
         {
             //Arrange
@@ -36,8 +35,96 @@ namespace PruebasUnitariasSorteos
                 throw e;
             }
         }
+
         [TestMethod]
-        public void PruebaEliminarSorteo()
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaCrearSorteo_Fallo_IdJuego(){
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_ITEM = 1;
+            sorteo1.HORA = "05:30:00";
+            sorteo1.ID_DIA = new List<int> { 1 };
+
+            Service1 result = new Service1();
+            try
+            {
+                //Act
+                result.CrearSorteo(sorteo1);
+                //Assert
+                Assert.Fail("El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaCrearSorteo_Fallo_IdItem(){
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.HORA = "05:30:00";
+            sorteo1.ID_DIA = new List<int> { 1 };
+
+            Service1 result = new Service1();
+            try
+            {
+                //Act
+                result.CrearSorteo(sorteo1);
+                //Assert
+                Assert.Fail("El parámetro ID_ITEM es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaCrearSorteo_Fallo_HORA(){
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 1;
+            sorteo1.ID_DIA = new List<int> { 1 };
+
+            Service1 result = new Service1();
+            try
+            {
+                //Act
+                result.CrearSorteo(sorteo1);
+                //Assert
+            Assert.Fail("El parámetro HORA es un parámetro obligatorio. Por favor verifique e intente de nuevo.");            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaCrearSorteo_Fallo_DIA()){
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 1;
+            sorteo1.HORA = "05:30:00";
+
+            Service1 result = new Service1();
+            try
+            {
+                //Act
+                result.CrearSorteo(sorteo1);
+                //Assert
+                Assert.Fail("El parámetro ID_DIA es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaEliminarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
             sorteo1.ID_SORTEO = 3;
@@ -56,9 +143,41 @@ namespace PruebasUnitariasSorteos
             }
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaEliminarSorteo_Fallo_IdSorteo(){
+            Sorteo sorteo1 = new Sorteo();
+
+            try
+            {
+                Service1 result = new Service1();
+                result.EliminarSorteo(sorteo1)
+                Assert.Fail("El parámetro ID_SORTEO es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
 
         [TestMethod]
-        public void PruebaModificarSorteo()
+        [ExpectedException(typeof(ConsultarException), "El sorteo que intenta eliminar tiene apuestas activas asociadas")]
+        public void PruebaEliminarSorteo_Fallo_Apuestas(){
+            int idSorteo = 1;
+
+            try
+            {
+                Service1 result = new Service1();
+                result.EliminarSorteo(sorteo1)
+                Assert.Fail("El parámetro ID_SORTEO es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+        [TestMethod]
+        public void PruebaModificarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
             sorteo1.ID_SORTEO = 1;
@@ -80,6 +199,127 @@ namespace PruebasUnitariasSorteos
                 throw e;
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaModificarSorteo_FALLO_IdSorteo()
+        {
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 3;
+            sorteo1.HORA = "3:00";
+            sorteo1.ID_DIA = new List<int> { 2 };
+
+            try
+            {
+                Service1 result = new Service1();
+
+                result.ModificarSorteo(sorteo1);
+                Assert.Fail("El parámetro ID_SORTEO es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaModificarSorteo_FALLO_IdJuego()
+        {
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_ITEM = 3;
+            sorteo1.HORA = "3:00";
+            sorteo1.ID_DIA = new List<int> { 2 };
+
+            try
+            {
+                Service1 result = new Service1();
+
+                result.ModificarSorteo(sorteo1);
+                Assert.Fail("El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaModificarSorteo_FALLO_IdItem()
+        {
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_SORTEO = 3;
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.HORA = "3:00";
+            sorteo1.ID_DIA = new List<int> { 2 };
+
+            try
+            {
+                Service1 result = new Service1();
+
+                result.ModificarSorteo(sorteo1);
+                Assert.Fail("El parámetro ID_ITEM es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaModificarSorteo_FALLO_HORA()
+        {
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 3;
+            sorteo1.ID_DIA = new List<int> { 2 };
+
+            try
+            {
+                Service1 result = new Service1();
+
+                result.ModificarSorteo(sorteo1);
+                Assert.Fail("El parámetro HORA es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParameterException), "El parámetro  es un parámetro obligatorio. Por favor verifique e intente de nuevo.")]
+        public void PruebaModificarSorteo_FALLO_DIA()
+        {
+            Sorteo sorteo1 = new Sorteo();
+            sorteo1.ID_SORTEO = 1;
+            sorteo1.ID_JUEGO = 1;
+            sorteo1.ID_ITEM = 3;
+            sorteo1.HORA = "3:00";
+
+            try
+            {
+                Service1 result = new Service1();
+
+                result.ModificarSorteo(sorteo1);
+                Assert.Fail("El parámetro DIA es un parámetro obligatorio. Por favor verifique e intente de nuevo.");
+
+            }
+            catch (ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
 
         [TestMethod]
         public void PruebaConsultarSorteoxJuego_Exito()
