@@ -55,6 +55,24 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Comunes\ServicioLotoUCAB.Servicio.Comunes.csproj">
+      <Project>{20691DEC-C099-430A-9C21-2CD1570D33C3}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Comunes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Entidades\ServicioLotoUCAB.Servicio.Entidades.csproj">
+      <Project>{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Excepciones\ServicioLotoUCAB.Servicio.Excepciones.csproj">
+      <Project>{124654E0-7615-42CD-9016-D3F7DBAF6447}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Excepciones</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Service.csproj">
+      <Project>{DB68BE8E-82EA-46F4-95E1-5E39C16D8ABD}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

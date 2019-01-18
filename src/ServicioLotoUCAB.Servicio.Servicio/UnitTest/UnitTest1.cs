@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sorteos;
-
-
+using ServicioLotoUCAB.Servicio.Entidades;
+using ServicioLotoUCAB.Servicio.Comunes;
+using ServicioLotoUCAB.Servicio.Servicio;
+using ServicioLotoUCAB.Servicio.Excepciones;
 
 namespace PruebasUnitariasSorteos
 {
@@ -17,10 +18,12 @@ namespace PruebasUnitariasSorteos
         {
             //Arrange
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 1;
-            sorteo1.HORA = "05:30:00";
-            sorteo1.ID_DIA = new List<int> { 1 };
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.juego.id_juego = 1;
+            sorteo1.id_sorteo = 1;
+            sorteo1.hora = "05:30:00";
+            sorteo1.dias.Add(dia);
 
             Service1 result = new Service1();
             try
@@ -40,9 +43,13 @@ namespace PruebasUnitariasSorteos
         public void PruebaCrearSorteo_Fallo_IdJuego()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_ITEM = 1;
-            sorteo1.HORA = "05:30:00";
-            sorteo1.ID_DIA = new List<int> { 1 };
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "05:30:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
             Exception excepcion = null;
             string respuestaEsperada = "ID_JUEGO";
 
@@ -64,9 +71,11 @@ namespace PruebasUnitariasSorteos
         public void PruebaCrearSorteo_Fallo_IdItem()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.HORA = "05:30:00";
-            sorteo1.ID_DIA = new List<int> { 1 };
+            sorteo1.juego.id_juego = 1;
+            sorteo1.hora = "05:30:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
             Exception excepcion = null;
             string respuestaEsperada = "ID_ITEM";
 
@@ -86,9 +95,13 @@ namespace PruebasUnitariasSorteos
         public void PruebaCrearSorteo_Fallo_HORA()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 6;
-            sorteo1.ID_ITEM = 7;
-            sorteo1.ID_DIA = new List<int> { 9 };
+            sorteo1.juego.id_juego = 6;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
             Exception excepcion = null;
             string respuestaEsperada = "HORA";
 
@@ -108,9 +121,11 @@ namespace PruebasUnitariasSorteos
         public void PruebaCrearSorteo_Fallo_DIA()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 1;
-            sorteo1.HORA = "05:30:00";
+            sorteo1.juego.id_juego = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "05:30:00";
             Service1 result = new Service1();
 
             Exception excepcion = null;
@@ -132,7 +147,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaEliminarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 11;
+            sorteo1.id_sorteo = 11;
 
             try
             {
@@ -192,11 +207,15 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 1;
-            sorteo1.HORA = "3:00:00";
-            sorteo1.ID_DIA = new List<int> { 1 };
+            sorteo1.id_sorteo = 1;
+            sorteo1.juego.id_juego = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "3:00:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
             Service1 result = new Service1();
             Respuesta expected = new Respuesta("Actualizado Exitosamente");
 
@@ -207,10 +226,14 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_FALLO_IdSorteo()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 3;
-            sorteo1.HORA = "3:00";
-            sorteo1.ID_DIA = new List<int> { 2 };
+            sorteo1.juego.id_juego = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "3:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
 
             Exception excepcion = null;
             string respuestaEsperada = "ID_SORTEO";
@@ -232,10 +255,14 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_FALLO_IdJuego()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_ITEM = 3;
-            sorteo1.HORA = "3:00";
-            sorteo1.ID_DIA = new List<int> { 2 };
+            sorteo1.id_sorteo = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "3:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
 
             Exception excepcion = null;
             string respuestaEsperada = "ID_JUEGO";
@@ -257,10 +284,12 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_FALLO_IdItem()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 3;
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.HORA = "3:00";
-            sorteo1.ID_DIA = new List<int> { 2 };
+            sorteo1.id_sorteo = 3;
+            sorteo1.juego.id_juego = 1;
+            sorteo1.hora = "3:00";
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
 
             Exception excepcion = null;
             string respuestaEsperada = "ID_ITEM";
@@ -282,10 +311,14 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_FALLO_HORA()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 3;
-            sorteo1.ID_DIA = new List<int> { 2 };
+            sorteo1.id_sorteo = 1;
+            sorteo1.juego.id_juego = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            Dia dia = new Dia();
+            dia.id_dia = 1;
+            sorteo1.dias.Add(dia);
 
             Exception excepcion = null;
             string respuestaEsperada = "HORA";
@@ -307,10 +340,12 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_FALLO_DIA()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_SORTEO = 1;
-            sorteo1.ID_JUEGO = 1;
-            sorteo1.ID_ITEM = 3;
-            sorteo1.HORA = "3:00";
+            sorteo1.id_sorteo = 1;
+            sorteo1.juego.id_juego = 1;
+            Item item = new Item();
+            item.id_item = 1;
+            sorteo1.items.Add(item);
+            sorteo1.hora = "3:00";
 
             Exception excepcion = null;
             string respuestaEsperada = "ID_DIA";
@@ -333,7 +368,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Exito()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 2;
+            sorteo1.juego.id_juego = 2;
 
             try
             {
@@ -354,7 +389,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Fallo_idJuego()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 0;
+            sorteo1.juego.id_juego = 0;
             Exception excepcion = null;
             string respuestaEsperada = "ID_JUEGO";
             try
@@ -373,7 +408,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Fallo_Excepcion()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.ID_JUEGO = 0;
+            sorteo1.juego.id_juego = 0;
             Exception excepcion = null;
             string respuestaEsperada = "No se encontró";
             try
@@ -415,7 +450,7 @@ namespace PruebasUnitariasSorteos
             string respuestaEsperada = "El juego no se encuentra registrado en el sistema";
             try
             {
-                result.ConsultarJuego(idJuego);
+                result.;
             }
             catch (ConsultarException e)
             {
