@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioLotoUCAB.Servicio.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioLotoUCAB.Servicio.Entidades", "ServicioLotoUCAB.Servicio.Entidades\ServicioLotoUCAB.Servicio.Entidades.csproj", "{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{8824D1B8-5754-4531-9A47-EC60C01DE1A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitarias", "PruebasUnitarias\PruebasUnitarias.csproj", "{2E34D415-4B51-4297-85D0-AAD92815E3F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 		{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8824D1B8-5754-4531-9A47-EC60C01DE1A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8824D1B8-5754-4531-9A47-EC60C01DE1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8824D1B8-5754-4531-9A47-EC60C01DE1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8824D1B8-5754-4531-9A47-EC60C01DE1A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E34D415-4B51-4297-85D0-AAD92815E3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E34D415-4B51-4297-85D0-AAD92815E3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E34D415-4B51-4297-85D0-AAD92815E3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E34D415-4B51-4297-85D0-AAD92815E3F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
