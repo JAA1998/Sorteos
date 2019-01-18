@@ -1,4 +1,6 @@
-﻿using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
+﻿using ServicioLotoUCAB.Servicio.AccesoDatos;
+using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
+using ServicioLotoUCAB.Servicio.Comunes;
 using ServicioLotoUCAB.Servicio.Entidades;
 using ServicioLotoUCAB.Servicio.Excepciones;
 using System;
@@ -10,7 +12,7 @@ using System.Transactions;
 
 namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
 {
-    public class ComandoEliminarSorteo : Comando<Respuesta>
+    public class ComandoEliminarSorteo : IComando<Respuesta>
     {
         private Sorteo s;
 
@@ -19,7 +21,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
             this.s = sort;
         }
 
-        public override Respuesta Ejecutar()
+        public Respuesta Ejecutar()
         {
             try
             {
@@ -28,14 +30,23 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ParameterException("ID_SORTEO");
                 }
 
-                ComandoConsultarSorteo cs = FabricaComandos.FabricarComandoConsultarSorteo(s.id_sorteo);
-                cs.Ejecutar();
+                int result;
+                DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
 
-                ComandoConsultarApuestas ca = FabricaComandos.FabricarComandoConsultarApuestas(s.id_sorteo);
-                ca.Ejecutar();
+                result = dao.ConsultarSorteo(s.id_sorteo);
 
-                int result = 0;
-                DaoSorteos dao = new DaoSorteos();
+                if (result != 1)
+                {
+                    throw new ConsultarException("El sorteo " + s.id_sorteo + " no se encuentra registrado en el sistema");
+                }
+
+                result = dao.ConsultarApuestas(s.id_sorteo);
+
+                if (result == 1)
+                {
+                    throw new ConsultarException("El sorteo que intenta eliminar tiene apuestas activas asociadas");
+                }
+                
                 TransactionOptions transactionOptions = new TransactionOptions();
                 transactionOptions.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
                 using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required, transactionOptions))

@@ -1,4 +1,5 @@
-﻿using ServicioLotoUCAB.Servicio.Entidades;
+﻿using ServicioLotoUCAB.Servicio.Comunes;
+using ServicioLotoUCAB.Servicio.Entidades;
 using ServicioLotoUCAB.Servicio.Logica.Comandos;
 using ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService;
 using System;
@@ -31,8 +32,7 @@ namespace ServicioLotoUCAB.Servicio.Servicio
                 log.Debug("Método: " + MethodBase.GetCurrentMethod().Name);
 
                 ComandoCrearSorteo cs = FabricaComandos.FabricarComandoCrearSorteo(s);
-                Respuesta resp = cs.Ejecutar();
-                return resp;
+                return cs.Ejecutar();
             }
             catch (Exception e)
             {
@@ -59,7 +59,6 @@ namespace ServicioLotoUCAB.Servicio.Servicio
 
                 ComandoEliminarSorteo es = FabricaComandos.FabricarComandoEliminarSorteo(s);
                 return es.Ejecutar();
-                
             }
             catch (Exception e)
             {

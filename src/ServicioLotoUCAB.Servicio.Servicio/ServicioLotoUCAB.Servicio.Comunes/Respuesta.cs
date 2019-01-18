@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServicioLotoUCAB.Servicio.Entidades
+namespace ServicioLotoUCAB.Servicio.Comunes
 {
     [DataContract]
     public class Respuesta
@@ -13,7 +13,7 @@ namespace ServicioLotoUCAB.Servicio.Entidades
         [DataMember]
         public string Mensaje { get; set; }
 
-        public Respuesta(string msg)
+        public Respuesta (string msg)
         {
             this.Mensaje = msg;
         }

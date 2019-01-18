@@ -10,3 +10,9 @@ C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\Serv
 C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.csproj.CoreCompileInputs.cache
 C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.dll
 C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.pdb
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\bin\Debug\ServicioLotoUCAB.Servicio.Entidades.dll
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\bin\Debug\ServicioLotoUCAB.Servicio.Entidades.pdb
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.csprojAssemblyReference.cache
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.csproj.CoreCompileInputs.cache
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.dll
+C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Entidades\obj\Debug\ServicioLotoUCAB.Servicio.Entidades.pdb

@@ -1,4 +1,5 @@
-﻿using ServicioLotoUCAB.Servicio.Entidades;
+﻿using ServicioLotoUCAB.Servicio.Comunes;
+using ServicioLotoUCAB.Servicio.Entidades;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 

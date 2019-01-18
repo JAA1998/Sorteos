@@ -1,4 +1,6 @@
-﻿using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
+﻿using ServicioLotoUCAB.Servicio.AccesoDatos;
+using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
+using ServicioLotoUCAB.Servicio.Comunes;
 using ServicioLotoUCAB.Servicio.Entidades;
 using ServicioLotoUCAB.Servicio.Excepciones;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
 {
-    public class ComandoConsultarSorteoxJuego : Comando<Respuesta>
+    public class ComandoConsultarSorteoxJuego : IComando<Respuesta>
     {
         private Sorteo s;
 
@@ -18,7 +20,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
             this.s = sort;
         }
 
-        public override Respuesta Ejecutar()
+        public Respuesta Ejecutar()
         {
             try
             {
@@ -27,11 +29,39 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ParameterException("ID_JUEGO");
                 }
 
-                ComandoConsultarJuego cj = FabricaComandos.FabricarComandoConsultarJuego(s.juego.id_juego);
-                cj.Ejecutar();
+                int result;
+                DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
 
-                DaoSorteos dao = new DaoSorteos();
-                return dao.ConsultarSorteoxJuego(s);
+                result = dao.ConsultarJuego(s.juego.id_juego);
+
+                if (result != 1)
+                {
+                    throw new ConsultarException("El juego " + s.juego.id_juego + " no se encuentra registrado en el sistema");
+                }
+
+                string r1 = string.Empty, r2 = string.Empty;
+
+                List<int> listaSorteos = dao.ConsultarSorteosdeJuego(s.juego.id_juego);
+
+                if (listaSorteos == null || listaSorteos.Count == 0)
+                {
+                    throw new ConsultarException("No se encontraron sorteos");
+                }
+
+                foreach (int idSorteo in listaSorteos)
+                {
+                    r2 = dao.ConsultarSorteoxJuego(idSorteo);
+                    r1 = string.Concat(r1, r2, "||");
+                    r2 = string.Empty;
+                    r2 = dao.ConsultarSorteoItemxJuego(idSorteo);
+                    r1 = string.Concat(r1, r2, "|");
+                    r2 = string.Empty;
+                    r2 = dao.ConsultarSorteoDiaxJuego(idSorteo);
+                    r1 = string.Concat(r1, r2, "||");
+                    r2 = string.Empty;
+                }
+
+                return new Respuesta(r1);
             }
             catch(Exception e)
             {

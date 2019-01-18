@@ -87,6 +87,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Comunes\ServicioLotoUCAB.Servicio.Comunes.csproj">
+      <Project>{20691DEC-C099-430A-9C21-2CD1570D33C3}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Comunes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Entidades\ServicioLotoUCAB.Servicio.Entidades.csproj">
       <Project>{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}</Project>
       <Name>ServicioLotoUCAB.Servicio.Entidades</Name>

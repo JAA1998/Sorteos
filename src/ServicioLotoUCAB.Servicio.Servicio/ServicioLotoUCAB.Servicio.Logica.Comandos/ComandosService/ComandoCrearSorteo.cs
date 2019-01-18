@@ -1,4 +1,5 @@
 ﻿using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
+using ServicioLotoUCAB.Servicio.Comunes;
 using ServicioLotoUCAB.Servicio.Entidades;
 using ServicioLotoUCAB.Servicio.Excepciones;
 using System;
@@ -7,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using ServicioLotoUCAB.Servicio.Logica.Comandos;
+using ServicioLotoUCAB.Servicio.AccesoDatos;
 
 namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
 {
-    public class ComandoCrearSorteo : Comando<Respuesta>
+    public class ComandoCrearSorteo : IComando<Respuesta>
     {
         private Sorteo s;
 
@@ -19,7 +22,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
             this.s = sort;
         }
 
-        public override Respuesta Ejecutar()
+        public Respuesta Ejecutar()
         {
             try
             {
@@ -40,23 +43,36 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ParameterException("ID_DIA");
                 }
 
-                ComandoConsultarJuego cj = FabricaComandos.FabricarComandoConsultarJuego(s.juego.id_juego);
-                cj.Ejecutar();
+                int result;
+
+                DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
+
+                result = dao.ConsultarJuego(s.juego.id_juego);
+
+                if (result != 1)
+                {
+                    throw new ConsultarException("El juego " + s.juego.id_juego + " no se encuentra registrado en el sistema");
+                }
 
                 foreach (Item i in s.items)
                 {
-                    ComandoConsultarItem ci = FabricaComandos.FabricarComandoConsultarItem(i.id_item, s.juego.id_juego);
-                    ci.Ejecutar();
+                    result = dao.ConsultarItem(i.id_item, s.juego.id_juego);
+                    if (result != 1)
+                    {
+                        throw new ConsultarException("El item " + i.id_item + " no se encuentra registrado en el sistema o no pertenece al juego " + s.juego.id_juego);
+                    }
                 }
 
                 foreach (Dia d in s.dias)
                 {
-                    ComandoConsultarDia cd = FabricaComandos.FabricarComandoConsultarDia(d.id_dia);
-                    cd.Ejecutar();
+                    result = dao.ConsultarDia(d.id_dia);
+                    if (result != 1)
+                    {
+                        throw new ConsultarException("El dia " + d.id_dia + " no se encuentra registrado en el sistema");
+                    }
                 }
 
-                ComandoConsultarHora ch = FabricaComandos.FabricarComandoConsultarHora(s.juego.id_juego, s.hora);
-                List<int> sorteosHora = ch.Ejecutar();
+                List<int> sorteosHora =  dao.ConsultarHora(s.juego.id_juego, s.hora);
 
                 if (sorteosHora != null || sorteosHora.Count != 0)
                 {
@@ -64,15 +80,18 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     {
                         foreach (Dia i in s.dias)
                         {
-                            ComandoConsultarDiaHora cdh = FabricaComandos.FabricarComandoConsultarDiaHora(idS, i.id_dia, s.hora, s.juego.id_juego);
-                            cdh.Ejecutar();
+                            result = dao.ConsultarDiaHora(idS, i.id_dia);
+                            if (result == i.id_dia)
+                            {
+                                throw new ConsultarException("El sorteo de hora " + s.hora + " para el día " + i.id_dia + " del juego " + s.juego.id_juego + " ya se encuentra registrado en el sistema");
+                            }
                         }
                     }
                 }
 
-                int result = 0, cupo = 0;
+                int cupo = 0;
                 float monto = 0;
-                DaoSorteos dao = new DaoSorteos();
+
                 TransactionOptions transactionOptions = new TransactionOptions();
                 transactionOptions.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
                 using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
@@ -80,8 +99,11 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     int idSorteo = dao.InsertarSorteo(s.juego.id_juego, s.hora);
                     foreach (Item i in s.items)
                     {
-                        ComandoConsultarDatosItem cdi = FabricaComandos.FabricarComandoConsultarDatosItem(i.id_item, ref cupo, ref monto);
-                        cdi.Ejecutar();
+                        result = dao.ConsultarDatosItem(i.id_item, ref cupo, ref monto);
+                        if (result != 1)
+                        {
+                            throw new ConsultarException("El item " + i.id_item + " no se encuentra registrado en el sistema");
+                        }
                         result = dao.InsertarSorteoItem(i.id_item, idSorteo, cupo, monto);
                     }
                     foreach (Dia d in s.dias)
@@ -90,6 +112,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     }
                     transaction.Complete();
                 }
+
                 if (result > 0)
                 {
                     return new Respuesta("Sorteo Creado Exitosamente");

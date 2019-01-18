@@ -46,15 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comando.cs" />
-    <Compile Include="ComandosService\ComandoConsultarApuestas.cs" />
-    <Compile Include="ComandosService\ComandoConsultarDatosItem.cs" />
-    <Compile Include="ComandosService\ComandoConsultarDia.cs" />
-    <Compile Include="ComandosService\ComandoConsultarDiaHora.cs" />
-    <Compile Include="ComandosService\ComandoConsultarHora.cs" />
-    <Compile Include="ComandosService\ComandoConsultarItem.cs" />
-    <Compile Include="ComandosService\ComandoConsultarJuego.cs" />
-    <Compile Include="ComandosService\ComandoConsultarSJ.cs" />
-    <Compile Include="ComandosService\ComandoConsultarSorteo.cs" />
     <Compile Include="ComandosService\ComandoConsultarSorteoxJuego.cs" />
     <Compile Include="ComandosService\ComandoCrearSorteo.cs" />
     <Compile Include="ComandosService\ComandoEliminarSorteo.cs" />
@@ -67,6 +58,10 @@
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.AccesoDatos\ServicioLotoUCAB.Servicio.AccesoDatos.csproj">
       <Project>{6907d65b-db97-4099-ab59-fff0ae8bc6e7}</Project>
       <Name>ServicioLotoUCAB.Servicio.AccesoDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Comunes\ServicioLotoUCAB.Servicio.Comunes.csproj">
+      <Project>{20691DEC-C099-430A-9C21-2CD1570D33C3}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Comunes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Entidades\ServicioLotoUCAB.Servicio.Entidades.csproj">
       <Project>{4914A281-FE00-4013-9BD4-8A5DBA4D92EC}</Project>

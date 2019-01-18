@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ServicioLotoUCAB.Servicio.AccesoDatos
 {
-    public class FabricaDAO
+    public class FabricaDao
     {
 
-        public static DaoSorteos CrearDaoSorteos()
+        public static DaoSorteos FabricarDaoSorteos()
         {
             return new DaoSorteos();
         }
