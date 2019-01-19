@@ -85,7 +85,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     {
                         foreach (Dia i in s.dias)
                         {
-                            result = dao.ConsultarDiaHora(idS, i.id_dia);
+                            result = dao.ConsultarDiaHora(idS);
                             if (result == i.id_dia)
                             {
                                 throw new ConsultarException("El sorteo de hora " + s.hora + " para el día " + i.id_dia + " del juego " + idJuego + " ya se encuentra registrado en el sistema");

@@ -34,7 +34,7 @@ namespace PruebasUnitariasSorteos
             juego.id_juego = 1;
             sorteo1.juego = juego;
             sorteo1.id_sorteo = 1;
-            sorteo1.hora = "05:30:00";
+            sorteo1.hora = "09:30:00";
 
             Service1 result = new Service1();
             try
@@ -180,7 +180,7 @@ namespace PruebasUnitariasSorteos
         public void PruebaEliminarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.id_sorteo = 11;
+            sorteo1.id_sorteo = 2;
 
             try
             {
@@ -240,15 +240,21 @@ namespace PruebasUnitariasSorteos
         public void PruebaModificarSorteo_EXITO()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.id_sorteo = 1;
-            sorteo1.juego.id_juego = 1;
+            sorteo1.id_sorteo = 2;
+            Juego juego = new Juego();
+            juego.id_juego = 1;
+            sorteo1.juego = juego;
             Item item = new Item();
             item.id_item = 1;
-            sorteo1.items.Add(item);
+            List<Item> i = new List<Item>();
+            i.Add(item);
+            sorteo1.items = i;
             sorteo1.hora = "3:00:00";
             Dia dia = new Dia();
             dia.id_dia = 1;
-            sorteo1.dias.Add(dia);
+            List<Dia> d = new List<Dia>();
+            d.Add(dia);
+            sorteo1.dias = d;
             Service1 result = new Service1();
             Respuesta expected = new Respuesta("Actualizado Exitosamente");
 
@@ -425,7 +431,9 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Exito()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.juego.id_juego = 2;
+            Juego j = new Juego();
+            j.id_juego = 2;
+            sorteo1.juego = j;
 
             try
             {
@@ -446,7 +454,9 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Fallo_idJuego()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.juego.id_juego = 0;
+            Juego j = new Juego();
+            j.id_juego = 0;
+            sorteo1.juego = j;
             Exception excepcion = null;
             string respuestaEsperada = "ID_JUEGO";
             try
@@ -465,9 +475,11 @@ namespace PruebasUnitariasSorteos
         public void PruebaConsultarSorteoxJuego_Fallo_Excepcion()
         {
             Sorteo sorteo1 = new Sorteo();
-            sorteo1.juego.id_juego = 0;
+            Juego j = new Juego();
+            j.id_juego = 0;
+            sorteo1.juego = j;
             Exception excepcion = null;
-            string respuestaEsperada = "No se encontró";
+            string respuestaEsperada = "No se encontraron sorteos";
             try
             {
                 Service1 result = new Service1();
@@ -609,28 +621,26 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarDia_Fallo_idSorteo()
-        {
-            DaoSorteos result = new DaoSorteos();
-            int idDia = 3;
-            Exception ConsultarSorteo = null;
-            try
-            {
-                result.ConsultarDia(idDia);
-
-            }
-            catch (Exception e)
-            {
-                ConsultarSorteo = e;
-            }
-
-            Assert.IsNotNull(ConsultarSorteo);
-        }
-
-        [TestMethod]
         public void PruebaConsultarDia_Fallo_idDia()
         {
             DaoSorteos result = new DaoSorteos();
+            int idDia = 10;
+
+            try
+            {
+                Assert.AreNotEqual(1, result.ConsultarDia(idDia));
+            }
+            catch (ConsultarException e)
+            {
+
+                throw e;
+            }
+        }
+
+        /*[TestMethod]
+        public void PruebaConsultarDia_Fallo_idSorteo()
+        {
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1;
             Exception ConsultarSorteo = null;
             try
@@ -644,7 +654,7 @@ namespace PruebasUnitariasSorteos
             }
 
             Assert.IsNotNull(ConsultarSorteo);
-        }
+        }*/
 
         [TestMethod]
         public void PruebaConsultarSJ_Exito()
@@ -684,20 +694,19 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDiaHora_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1;
-            int idDia = 1;
-            Exception ConsultarException = null;
+            int idDia = 4;
 
             try
             {
-                result.ConsultarDiaHora(idSorteo, idDia);
+                Assert.AreNotEqual(idDia, result.ConsultarDiaHora(idSorteo));
             }
             catch (Exception e)
             {
-                ConsultarException = e;
+                throw e;
             }
-            Assert.IsNotNull(ConsultarException);
+            
         }
 
 
@@ -705,13 +714,13 @@ namespace PruebasUnitariasSorteos
 
         public void PruebaConsultarDiaHora_Fallo_idSorteo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1;
             int idDia = 2;
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia));
+                Assert.AreEqual(idDia, result.ConsultarDiaHora(idSorteo));
             }
             catch (Exception e)
             {
@@ -768,7 +777,7 @@ namespace PruebasUnitariasSorteos
 
             try
             {
-                Assert.AreEqual(1, dao.ConsultarApuestas(idSorteo));
+                Assert.AreNotEqual(1, dao.ConsultarApuestas(idSorteo));
             }
             catch (ConsultarException ex)
             {
@@ -779,21 +788,17 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarApuestas_Fallo()
         {
-            DaoSorteos dao = new DaoSorteos();
+            DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1;
-            Exception ConsultarSorteo = null;
 
             try
             {
-                dao.ConsultarApuestas(idSorteo);
-
+                Assert.AreEqual(1, dao.ConsultarApuestas(idSorteo));
             }
-            catch (Exception ex)
+            catch (ConsultarException ex)
             {
-                ConsultarSorteo = ex;
+                throw ex;
             }
-
-            Assert.IsNotNull(ConsultarSorteo);
         }
 
 

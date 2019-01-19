@@ -259,7 +259,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
           * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
           * @return: retorna 1 si ocurre un error o no son iguales
           */
-        public int ConsultarDiaHora(int idSorteo, int idDia)
+        public int ConsultarDiaHora(int idSorteo)
         {
             try
             {
