@@ -5,6 +5,8 @@ using ServicioLotoUCAB.Servicio.Entidades;
 using ServicioLotoUCAB.Servicio.Comunes;
 using ServicioLotoUCAB.Servicio.Servicio;
 using ServicioLotoUCAB.Servicio.Excepciones;
+using ServicioLotoUCAB.Servicio.AccesoDatos;
+using ServicioLotoUCAB.Servicio.AccesoDatos.Dao;
 
 namespace PruebasUnitariasSorteos
 {
@@ -427,7 +429,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarJuego_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idJuego = 1;
             try
             {
@@ -444,13 +446,13 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarJuego_Fallo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idJuego = 0;
             Exception excepcion = null;
             string respuestaEsperada = "El juego no se encuentra registrado en el sistema";
             try
             {
-                result.;
+                result.ConsultarJuego(idJuego);
             }
             catch (ConsultarException e)
             {
@@ -463,7 +465,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarItem_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 1;
             int idJuego = 1;
 
@@ -481,7 +483,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarItem_Fallo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 0;
             int idJuego = 0;
             Exception excepcion = null;
@@ -501,7 +503,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSorteo_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 1;
 
             try
@@ -518,7 +520,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSorteo_Fallo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 100;
             Exception excepcion = null;
             string respuestaEsperada = "El sorteo no se encuentra registrado en el sistema";
@@ -537,7 +539,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDia_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idDia = 1;
 
             try
@@ -552,9 +554,9 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
-        public void PruebaConsultarDia_Fallo()
+        public void PruebaConsultarDia_Fallo_idSorteo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idDia = 3;
             Exception ConsultarSorteo = null;
             try
@@ -571,9 +573,28 @@ namespace PruebasUnitariasSorteos
         }
 
         [TestMethod]
+        public void PruebaConsultarDia_Fallo_idDia()
+        {
+            DaoSorteos result = new DaoSorteos();
+            int idSorteo = 1;
+            Exception ConsultarSorteo = null;
+            try
+            {
+                result.ConsultarDia(idSorteo);
+
+            }
+            catch (Exception e)
+            {
+                ConsultarSorteo = e;
+            }
+
+            Assert.IsNotNull(ConsultarSorteo);
+        }
+
+        [TestMethod]
         public void PruebaConsultarSJ_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 1; int idJuego = 1;
 
             try
@@ -589,7 +610,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSJ_Fallo_idSorteo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 0; int idJuego = 1;
             Exception excepcion = null;
             string respuestaEsperada = "";
@@ -608,16 +629,14 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDiaHora_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 1;
             int idDia = 1;
-            int idJuego = 1;
-            string hora = "02:30:00";
             Exception ConsultarException = null;
 
             try
             {
-                result.ConsultarDiaHora(idSorteo, idDia, hora, idJuego);
+                result.ConsultarDiaHora(idSorteo, idDia);
             }
             catch (Exception e)
             {
@@ -631,15 +650,13 @@ namespace PruebasUnitariasSorteos
 
         public void PruebaConsultarDiaHora_Fallo_idSorteo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idSorteo = 1;
             int idDia = 2;
-            int idJuego = 1;
-            string hora = "02:30:00";
 
             try
             {
-                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia, hora, idJuego));
+                Assert.AreEqual(1, result.ConsultarDiaHora(idSorteo, idDia));
             }
             catch (Exception e)
             {
@@ -652,7 +669,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarHora_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idJuego = 1;
             string hora = "01:00:00";
 
@@ -671,7 +688,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarHora_Fallo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idJuego = 1;
             string hora = "05:29:00";
 
@@ -691,12 +708,12 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarApuestas_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 2;
 
             try
             {
-                Assert.AreEqual(0, result.ConsultarApuestas(idSorteo));
+                Assert.AreEqual(1, dao.ConsultarApuestas(idSorteo));
             }
             catch (ConsultarException ex)
             {
@@ -707,13 +724,13 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarApuestas_Fallo()
         {
-            Service1 result = new Service1();
+            DaoSorteos dao = new DaoSorteos();
             int idSorteo = 1;
             Exception ConsultarSorteo = null;
 
             try
             {
-                result.ConsultarApuestas(idSorteo);
+                dao.ConsultarApuestas(idSorteo);
 
             }
             catch (Exception ex)
@@ -728,7 +745,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Exito()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 20;
@@ -746,7 +763,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_idItem()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 20;
@@ -767,7 +784,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_Cupo()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 1;
             int cupo = 0;
             float monto = 20;
@@ -787,7 +804,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_Monto()
         {
-            Service1 result = new Service1();
+            DaoSorteos result = new DaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 8;

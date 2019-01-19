@@ -22,3 +22,9 @@ C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioL
 C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.csproj.CoreCompileInputs.cache
 C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.dll
 C:\Users\Javier\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.pdb
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\bin\Debug\ServicioLotoUCAB.Servicio.Comunes.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\bin\Debug\ServicioLotoUCAB.Servicio.Comunes.pdb
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.csprojAssemblyReference.cache
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.csproj.CoreCompileInputs.cache
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.dll
+C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Comunes\obj\Debug\ServicioLotoUCAB.Servicio.Comunes.pdb

@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.AccesoDatos\ServicioLotoUCAB.Servicio.AccesoDatos.csproj">
+      <Project>{6907d65b-db97-4099-ab59-fff0ae8bc6e7}</Project>
+      <Name>ServicioLotoUCAB.Servicio.AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Comunes\ServicioLotoUCAB.Servicio.Comunes.csproj">
       <Project>{20691DEC-C099-430A-9C21-2CD1570D33C3}</Project>
       <Name>ServicioLotoUCAB.Servicio.Comunes</Name>
@@ -67,6 +71,10 @@
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Excepciones\ServicioLotoUCAB.Servicio.Excepciones.csproj">
       <Project>{124654E0-7615-42CD-9016-D3F7DBAF6447}</Project>
       <Name>ServicioLotoUCAB.Servicio.Excepciones</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Logica.Comandos\ServicioLotoUCAB.Servicio.Logica.Comandos.csproj">
+      <Project>{91323553-ecf4-4cf8-9c47-6c46d5cce5c5}</Project>
+      <Name>ServicioLotoUCAB.Servicio.Logica.Comandos</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Service.csproj">
       <Project>{DB68BE8E-82EA-46F4-95E1-5E39C16D8ABD}</Project>
