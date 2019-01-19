@@ -496,7 +496,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarJuego_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idJuego = 1;
             try
             {
@@ -513,7 +513,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarJuego_Fallo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idJuego = 0;
             Exception excepcion = null;
             string respuestaEsperada = "El juego no se encuentra registrado en el sistema";
@@ -532,7 +532,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarItem_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 1;
             int idJuego = 1;
 
@@ -550,7 +550,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarItem_Fallo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 0;
             int idJuego = 0;
             Exception excepcion = null;
@@ -570,7 +570,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSorteo_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1;
 
             try
@@ -587,7 +587,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSorteo_Fallo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 100;
             Exception excepcion = null;
             string respuestaEsperada = "El sorteo no se encuentra registrado en el sistema";
@@ -606,7 +606,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDia_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idDia = 1;
 
             try
@@ -623,7 +623,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDia_Fallo_idDia()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idDia = 10;
 
             try
@@ -659,7 +659,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSJ_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 1; int idJuego = 1;
 
             try
@@ -675,7 +675,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarSJ_Fallo_idSorteo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idSorteo = 0; int idJuego = 1;
             Exception excepcion = null;
             string respuestaEsperada = "";
@@ -733,7 +733,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarHora_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idJuego = 1;
             string hora = "01:00:00";
 
@@ -752,7 +752,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarHora_Fallo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idJuego = 1;
             string hora = "05:29:00";
 
@@ -805,7 +805,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Exito()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 20;
@@ -823,7 +823,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_idItem()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 20;
@@ -844,7 +844,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_Cupo()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 1;
             int cupo = 0;
             float monto = 20;
@@ -864,7 +864,7 @@ namespace PruebasUnitariasSorteos
         [TestMethod]
         public void PruebaConsultarDatosItem_Fallo_Monto()
         {
-            DaoSorteos result = new DaoSorteos();
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
             int idItem = 1;
             int cupo = 1;
             float monto = 8;
@@ -877,6 +877,355 @@ namespace PruebasUnitariasSorteos
             catch (ConsultarException ex)
             {
                 excepcion = ex;
+                StringAssert.Contains(excepcion.Message, respuestaEsperada);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarIdJuego_Exito(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = 0; // Colocar el id juego que se espera obtener 
+            try{
+                Assert.AreEqual(respuestaEsperada, result.ConsultarIdJuego(idSorteo))
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarIdJuego_Fallo(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null; 
+            try{
+               result.ConsultarIdJuego(idSorteo);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteo_Exito(){
+            int idJuego = 2;
+            string hora = "04:00:00";
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = 3; //Colocar idSorteo esperado 
+            try{
+                Assert.AreEqual(respuestaEsperada,result.InsertarSorteo(idJuego,hora));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteo_FalloIdJuego(){
+            string hora = "04:00:00";
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;
+            try{
+                result.InsertarSorteo(null,hora);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteo_FalloHora(){
+            int idJuego = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;
+            try{
+                result.InsertarSorteo(idJuego," ");
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoItem_Exito(){
+            int idSorteo = 2;
+            int idItem = 1;
+            float monto = 230;
+            int cupo = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = -1; 
+            try{
+                Assert.AreEqual(respuestaEsperada,result.InsertarSorteoItem(idItem, idSorteo, cupo, monto));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoItem_FalloIdItem(){
+            int idSorteo = 2;
+            float monto = 230;
+            int cupo = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoItem(null, idSorteo, cupo, monto);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoItem_FalloIdSorteo(){
+            int idItem = 2;
+            float monto = 230;
+            int cupo = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoItem(idItem, null, cupo, monto);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoItem_FalloCupo()){
+            int idItem = 2;
+            float monto = 230;
+            int idSorteo = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoItem(idItem, idSorteo, null, monto);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoItem_FalloMonto(){
+            int idItem = 2;
+            int cupo = 6;
+            int idSorteo = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoItem(idItem, idSorteo, cupo, null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoInsertarSorteoDia_Exito(){
+            int idSorteo = 2;
+            int idDia = 4;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = -1; 
+            try{
+                Assert.AreEqual(respuestaEsperada,result.InsertarSorteoDia(idDia, idSorteo));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoDia_FalloIdDia(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoDia(null, idSorteo);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoDia_FalloIdSorteo(){
+            int idDia = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.InsertarSorteoDia(idDia, null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaInsertarSorteoEliminarSorteoItem_Exito(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = -1; 
+            try{
+                Assert.AreEqual(respuestaEsperada,result.EliminarSorteoItem(idSorteo));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaEliminarSorteoItem_Fallo(){
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.EliminarSorteoItem(null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaEliminarSorteoDia_Exito(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            int respuestaEsperada = -1; 
+            try{
+                Assert.AreEqual(respuestaEsperada,result.EliminarSorteoDia(idSorteo));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaEliminarSorteoDia_Fallo(){
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;            
+            try{
+                result.EliminarSorteoDia(null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteosDeJuego_Exito(){
+            int idJuego = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            List<int> respuestaEsperada = new List<int>();
+            respuestaEsperada.Add(2); // Agregarle la lista de Sorteos Esperados
+            try{
+                Assert.AreEqual(respuestaEsperada,result.ConsultarSorteosDeJuego(idJuego));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteosDeJuego_Fallo(){
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            List<int> respuestaEsperada = new List<int>();
+            Exception excepcion = null;
+            try{
+                result.ConsultarSorteosDeJuego(null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                Assert.IsNotNull(excepcion);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteoItemxJuego_Exito(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            string respuestaEsperada = " "; // Colocar el string de sorteos esperados
+            try{
+                StringAssert.Contains(respuestaEsperada,result.ConsultarSorteoItemxJuego(idSorteo));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteoItemxJuego_Fallo(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;
+            string respuestaEsperada = " "; // Colocar el string de sorteos esperados
+            try{
+                result.ConsultarSorteoItemxJuego(idSorteo);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
+                StringAssert.Contains(excepcion.Message, respuestaEsperada);
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteoDiaxJuego_Exito(){
+            int idSorteo = 2;
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            string respuestaEsperada = " "; // Colocar el string de sorteos esperados
+            try{
+                StringAssert.Contains(respuestaEsperada,result.ConsultarSorteoDiaxJuego(idSorteo));
+            }
+            catch(ConsultarException e)
+            {
+                throw e;
+            }
+        }
+
+        [TestMethod]
+        public void PruebaConsultarSorteoDiaxJuego_Fallo(){
+            DaoSorteos result = FabricaDao.FabricarDaoSorteos();
+            Exception excepcion = null;
+            string respuestaEsperada = " "; // Colocar el string de sorteos esperados
+            try{
+                result.ConsultarSorteoDiaxJuego(null);
+            }
+            catch(ConsultarException e)
+            {
+                excepcion = e;
                 StringAssert.Contains(excepcion.Message, respuestaEsperada);
             }
         }
