@@ -77,3 +77,5 @@ C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\Servici
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Servicio\obj\Debug\ServicioLotoUCAB.Servicio.Service.csproj.CopyComplete
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Servicio\obj\Debug\ServicioLotoUCAB.Servicio.Servicio.dll
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Servicio\obj\Debug\ServicioLotoUCAB.Servicio.Servicio.pdb
+C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Servicio\bin\ServicioLotoUCAB.Servicio.Comunes.dll
+C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.Servicio\bin\ServicioLotoUCAB.Servicio.Comunes.pdb

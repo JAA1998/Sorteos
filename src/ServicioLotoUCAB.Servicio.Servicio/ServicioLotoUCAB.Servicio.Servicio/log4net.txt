@@ -1,0 +1,103 @@
+2019-01-20 10:49:41,153 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:49:41,511 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:51:02,384 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:51:02,592 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:51:52,170 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:51:52,302 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:51:54,681 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El juego 4 no se encuentra registrado en el sistema
+2019-01-20 10:52:06,234 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:52:06,234 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:52:06,250 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteosdeJuego
+2019-01-20 10:52:06,258 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:52:06,266 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoItemxJuego
+2019-01-20 10:52:06,302 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoDiaxJuego
+2019-01-20 10:52:06,310 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:52:06,314 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoItemxJuego
+2019-01-20 10:52:06,318 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoDiaxJuego
+2019-01-20 10:52:06,322 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 10:52:06,326 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoItemxJuego
+2019-01-20 10:52:06,330 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteoDiaxJuego
+2019-01-20 10:52:57,027 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:52:57,083 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:52:57,087 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:52:57,091 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 10:52:57,099 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSJ
+2019-01-20 10:52:57,103 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 10:52:57,354 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El dia 0 no se encuentra registrado en el sistema
+2019-01-20 10:53:05,655 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:53:05,655 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:53:05,663 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:53:05,667 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 10:53:05,671 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSJ
+2019-01-20 10:53:05,675 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 10:53:05,679 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarHora
+2019-01-20 10:53:05,687 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarApuestas
+2019-01-20 10:53:05,907 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo que intenta modificar tiene apuestas activas asociadas
+2019-01-20 10:53:16,791 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:53:16,791 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:53:17,007 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo 2 no se encuentra registrado en el sistema
+2019-01-20 10:53:29,079 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:53:29,079 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:53:29,287 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo 4 no se encuentra registrado en el sistema
+2019-01-20 10:53:58,004 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:53:58,004 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:53:58,012 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:53:58,020 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 10:53:58,196 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El item 1 no se encuentra registrado en el sistema o no pertenece al juego 2
+2019-01-20 10:54:05,136 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:54:05,136 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:54:05,140 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 10:54:05,144 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 10:54:05,144 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSJ
+2019-01-20 10:54:05,148 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 10:54:05,148 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarHora
+2019-01-20 10:54:05,152 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarApuestas
+2019-01-20 10:54:05,212 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ModificarSorteo
+2019-01-20 10:54:05,536 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: EliminarSorteoItem
+2019-01-20 10:54:05,544 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDatosItem
+2019-01-20 10:54:05,568 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteoItem
+2019-01-20 10:54:05,620 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: EliminarSorteoDia
+2019-01-20 10:54:05,628 [11] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteoDia
+2019-01-20 10:54:13,124 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:54:13,352 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: Referencia a objeto no establecida como instancia de un objeto.
+2019-01-20 10:54:40,308 [11] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:54:40,568 [11] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_ITEM es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:54:53,993 [23] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:54:54,241 [23] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro HORA es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:55:12,236 [23] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:55:12,551 [23] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_DIA es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:55:24,058 [24] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:55:24,058 [24] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:55:24,346 [24] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo 0 no se encuentra registrado en el sistema
+2019-01-20 10:56:03,854 [24] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 10:56:04,173 [24] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 10:56:17,087 [24] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: EliminarSorteo
+2019-01-20 10:56:17,095 [24] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarSorteo
+2019-01-20 10:56:17,391 [24] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo 0 no se encuentra registrado en el sistema
+2019-01-20 11:21:00,961 [9] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ConsultarSorteoxJuego
+2019-01-20 11:21:01,262 [9] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 11:21:15,787 [9] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 11:21:16,007 [9] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_JUEGO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 11:21:31,713 [9] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: ModificarSorteo
+2019-01-20 11:21:31,970 [9] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_SORTEO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 11:21:51,411 [9] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: EliminarSorteo
+2019-01-20 11:21:51,592 [9] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El parámetro ID_SORTEO es un parámetro obligatorio. Por favor verifique e intente de nuevo.
+2019-01-20 11:22:06,561 [9] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: CrearSorteo
+2019-01-20 11:22:06,655 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 11:22:08,175 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 11:22:08,181 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 11:22:08,183 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 11:22:08,187 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarHora
+2019-01-20 11:22:08,192 [9] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDiaHora
+2019-01-20 11:22:08,350 [9] ERROR ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Error: El sorteo de hora 01:00:00 para el día 1 del juego 1 ya se encuentra registrado en el sistema
+2019-01-20 11:22:22,159 [18] DEBUG ServicioLotoUCAB.Servicio.Servicio.ServicioSorteos - Método: CrearSorteo
+2019-01-20 11:22:22,159 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarJuego
+2019-01-20 11:22:22,162 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarItem
+2019-01-20 11:22:22,164 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 11:22:22,166 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDia
+2019-01-20 11:22:22,168 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarHora
+2019-01-20 11:22:22,178 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteo
+2019-01-20 11:22:22,269 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: ConsultarDatosItem
+2019-01-20 11:22:22,276 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteoItem
+2019-01-20 11:22:22,281 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteoDia
+2019-01-20 11:22:22,283 [18] DEBUG ServicioLotoUCAB.Servicio.AccesoDatos.Dao.DaoSorteos - Método: InsertarSorteoDia

@@ -43,7 +43,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
         }
 
         /**
-         * Método: Conectar
+         * Método: Desconectar
          * -------------------------------------------------------------------------------------------------
          * Realiza la desconexión a la base de datos
          */

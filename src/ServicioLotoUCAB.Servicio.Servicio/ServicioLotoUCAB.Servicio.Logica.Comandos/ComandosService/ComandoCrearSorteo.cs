@@ -29,7 +29,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 /**
                  * Comprueba los parámetros
                  */
-                if (s == null || s.juego == null || s.juego.id_juego == null)
+                if (s == null || s.juego == null || s.juego.id_juego == null || s.juego.id_juego == 0)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }

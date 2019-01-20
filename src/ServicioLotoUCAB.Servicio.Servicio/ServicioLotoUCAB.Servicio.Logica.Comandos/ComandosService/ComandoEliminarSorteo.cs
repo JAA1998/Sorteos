@@ -28,7 +28,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 /**
                  * Comprueba los parámetros
                  */
-                if (s == null || s.id_sorteo == null)
+                if (s == null || s.id_sorteo == null || s.id_sorteo == 0)
                 {
                     throw new ParameterException("ID_SORTEO");
                 }

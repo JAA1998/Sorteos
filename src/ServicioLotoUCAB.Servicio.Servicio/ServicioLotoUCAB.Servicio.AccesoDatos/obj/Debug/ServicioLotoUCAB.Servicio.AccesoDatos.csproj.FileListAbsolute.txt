@@ -60,3 +60,5 @@ C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\Servici
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.AccesoDatos\obj\Debug\ServicioLotoUCAB.Servicio.AccesoDatos.csproj.CopyComplete
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.AccesoDatos\obj\Debug\ServicioLotoUCAB.Servicio.AccesoDatos.dll
 C:\Users\MAXSIO-2\Desktop\Sorteos\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.AccesoDatos\obj\Debug\ServicioLotoUCAB.Servicio.AccesoDatos.pdb
+C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.AccesoDatos\bin\Debug\ServicioLotoUCAB.Servicio.Comunes.dll
+C:\Users\Javier\Desktop\ISUCAB_15524\src\ServicioLotoUCAB.Servicio.Servicio\ServicioLotoUCAB.Servicio.AccesoDatos\bin\Debug\ServicioLotoUCAB.Servicio.Comunes.pdb
