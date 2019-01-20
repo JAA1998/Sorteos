@@ -26,7 +26,10 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
         {
             try
             {
-                if (s.juego.id_juego == 0)
+                /**
+                 * Comprueba los parámetros
+                 */
+                if (s == null || s.juego == null || s.juego.id_juego == null)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }
@@ -34,7 +37,7 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 {
                     throw new ParameterException("ID_ITEM");
                 }
-                if (s.hora.Length == 0)
+                if (s.hora == null || s.hora.Length == 0)
                 {
                     throw new ParameterException("HORA");
                 }
@@ -47,6 +50,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
 
                 DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
 
+                /**
+                 * Comprueba que el juego este registrado en la base de datos
+                 */
                 result = dao.ConsultarJuego(s.juego.id_juego);
 
                 if (result != 1)
@@ -54,6 +60,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ConsultarException("El juego " + s.juego.id_juego + " no se encuentra registrado en el sistema");
                 }
 
+                /**
+                 * Comprueba que los items esten registrados en la base de datos
+                 */
                 foreach (Item i in s.items)
                 {
                     result = dao.ConsultarItem(i.id_item, s.juego.id_juego);
@@ -63,6 +72,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     }
                 }
 
+                /**
+                 * Comprueba que los días esten registrados en la base de datos
+                 */
                 foreach (Dia d in s.dias)
                 {
                     result = dao.ConsultarDia(d.id_dia);
@@ -72,6 +84,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     }
                 }
 
+                /**
+                 * Comprueba que no haya un sorteo del mismo juego, la misma hora y el mismo día registrado en la base de datos
+                 */
                 List<int> sorteosHora =  dao.ConsultarHora(s.juego.id_juego, s.hora);
 
                 if (sorteosHora != null || sorteosHora.Count != 0)
@@ -92,6 +107,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 int cupo = 0;
                 float monto = 0;
 
+                /**
+                 * Realiza la insersión del sorteo
+                 */
                 TransactionOptions transactionOptions = new TransactionOptions();
                 transactionOptions.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
                 using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
@@ -113,6 +131,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     transaction.Complete();
                 }
 
+                /**
+                 * Devuelve la respuesta
+                 */
                 if (result > 0)
                 {
                     return new Respuesta("Sorteo Creado Exitosamente");

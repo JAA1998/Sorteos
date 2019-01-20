@@ -24,7 +24,10 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
         {
             try
             {
-                if (s.juego.id_juego == 0)
+                /**
+                 * Comprueba los parámetros
+                 */
+                if (s == null || s.juego == null || s.juego.id_juego == null)
                 {
                     throw new ParameterException("ID_JUEGO");
                 }
@@ -32,6 +35,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 int result;
                 DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
 
+                /**
+                 * Comprueba que el juego este registrado en la base de datos
+                 */
                 result = dao.ConsultarJuego(s.juego.id_juego);
 
                 if (result != 1)
@@ -41,6 +47,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
 
                 string r1 = string.Empty, r2 = string.Empty;
 
+                /**
+                 * Consulta los juegos de un sorteo i devuelve los id
+                 */
                 List<int> listaSorteos = dao.ConsultarSorteosdeJuego(s.juego.id_juego);
 
                 if (listaSorteos == null || listaSorteos.Count == 0)
@@ -48,6 +57,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ConsultarException("No se encontraron sorteos");
                 }
 
+                /**
+                 * Realiza la consulta
+                 */
                 foreach (int idSorteo in listaSorteos)
                 {
                     r2 = dao.ConsultarSorteoxJuego(idSorteo);
@@ -61,6 +73,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     r2 = string.Empty;
                 }
 
+                /**
+                 * Devuelve la respuesta
+                 */
                 return new Respuesta(r1);
             }
             catch(Exception e)

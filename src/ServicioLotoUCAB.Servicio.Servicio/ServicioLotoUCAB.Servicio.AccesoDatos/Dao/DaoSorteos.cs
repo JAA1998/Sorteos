@@ -24,6 +24,11 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
 
         public MySqlDataReader reader { get; set; }
 
+        /**
+         * Método: Conectar
+         * -------------------------------------------------------------------------------------------------
+         * Realiza la conexión a la base de datos
+         */
         public void Conectar()
         {
             try
@@ -37,6 +42,11 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
             }
         }
 
+        /**
+         * Método: Conectar
+         * -------------------------------------------------------------------------------------------------
+         * Realiza la desconexión a la base de datos
+         */
         public void Desconectar()
         {
             if (connection != null)
@@ -56,8 +66,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
          * -------------------------------------------------------------------------------------------------
          * Esta funcion permite consultar el estatus de un juego (Activo o Inactivo)
          * @param idJuego: entero que representa el id del juego en la base de datos
-         * @return: retorna 1 si se consigue en la tabla la fila que contenga el estatus (Activo) del juego
-         * @return: retorna 0 si se consigue en la tabla la fila que contenga el estatus (Inactivo) del juego
+         * @return: retorna el estatus del juego
          */
         public int ConsultarJuego(int idJuego)
         {
@@ -94,7 +103,8 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
           * -------------------------------------------------------------
           * Esta funcion permite consultar el estatus de un item
           * @param idItem: Identificador del item que se quiere consultar
-          * @return: retorna 1 si se logra obtener el item
+          * @param idJuego: Identificador del juego que se quiere consultar
+          * @return: retorna 1 si se logra obtener el item y si pertenece al juego
           * @return: retorna 0 si ocurre un error
           */
         public int ConsultarItem(int idItem, int idJuego)
@@ -134,8 +144,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
           * -----------------------------------------------------------------
           * Esta funcion permite consultar el estatus de un sorteo
           * @param idSorteo: Identificador del sorteo que se quiere consultar
-          * @return: retorna 1 si se logra obtener el sorteo
-          * @return: retorna 0 si ocurre un error o no se encontro
+          * @return: retorna el estatus del sorteo
           */
         public int ConsultarSorteo(int idSorteo)
         {
@@ -173,8 +182,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
           * -----------------------------------------------------------------
           * Esta funcion permite consultar el estatus de un dia
           * @param idDia: Identificador del dia que se quiere consultar
-          * @return: retorna 1 si se logra obtener el dia
-          * @return: retorna 0 si ocurre un error o no se encontro
+          * @return: retorna 1 el estatus del día
           */
         public int ConsultarDia(int idDia)
         {
@@ -252,12 +260,9 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
         /**
           * Metodo: ConsultarDiaHora
           * ------------------------------------------------------------------
-          * Esta funcion permite consultar el dia de un sorteo y verificar si
-          * es igual al dia que se le pasa como parametro
+          * Esta funcion permite consultar el dia de un sorteo
           * @param idSorteo: Identificador del sorteo que se quiere consultar
-          * @param dia: Es el dia que se quiere revisar
-          * @return: retorna 0 los dias del sorteo y la variable "dia" son iguales
-          * @return: retorna 1 si ocurre un error o no son iguales
+          * @return: retorna el día del sorteo
           */
         public int ConsultarDiaHora(int idSorteo)
         {
@@ -297,9 +302,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
           * pasada por parametro 
           * @param idJuego: Identificador del juego al que 
           * @param hora: Es la hora que se quiere revisar
-          * @param dia: es el dia del sorteo que se quiere revisar
-          * @return: retorna 0 ya existe un sorteo en esa hora 
-          * @return: retorna 1 si ocurre un error o no existe un sorteo a esa hora
+          * @return: retorna una lista con los sorteos de esa misma hora y del mismo juego
           */
         public List<int> ConsultarHora(int idJuego, string hora)
         {
@@ -346,8 +349,7 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
          * Esta función permite consultar el estatus de una apuesta realizada según el
          * sorteo que es pasado por parametro
          * @param idSorteo: Identificador del sorteo a consultar
-         * @return: 1 si consigue la fila en la base de datos el id
-         * @retrun: 0 si no consigue la fila o existe un error
+         * @return: el estatus de la jugada
          */
         public int ConsultarApuestas(int idSorteo)
         {
@@ -425,56 +427,14 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
                 Desconectar();
             }
         }
-
+        
         /**
-          * Metodo: ConsultarIdJuego
-          * -----------------------------------------------------------------
-          * Esta funcion permite consultar el id del juego de un sorteo
-          * @param idSorteo: Identificador del sorteo que se quiere consultar
-          * @return: retorna el id del juego de un sorteo
-          * @return: retorna 0 si ocurre un error o no se encontro
+          * Método: InsertarSorteo
+          * ---------------------------------------------------------------------------
+          * Este metodo inserta un sorteo en la tabla sorteo
+          * @param s: Contiene los datos necesarios para poder insertar el sorteo
+          * @return retorna el identificador del sorteo insertado
           */
-        public int ConsultarIdJuego(int idSorteo)
-        {
-            try
-            {
-                log.Debug("Método: " + MethodBase.GetCurrentMethod().Name);
-
-                Conectar();
-
-                string query = "SELECT ID_JUEGO FROM TB_SORTEO WHERE ID_SORTEO=" + idSorteo;
-                int idJuego = 0;
-                command = new MySqlCommand(query, connection);
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    idJuego = reader.GetInt32(0);
-                }
-
-                return idJuego;
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                Desconectar();
-            }
-        }
-
-            /**
-             * Método: CrearSorteo
-             * ---------------------------------------------------------------------------
-             * Este metodo realiza la creacion de un sorteo y lo ingresa a base de datos
-             * @param s: Contiene los datos necesarios para poder crear el sorteo
-             * @return retorna un tipo de dato llamado Respuesta el cual contiene 
-             * un string el cual indica si se inserto exitosamente el sorteo o si no
-             * se pudo insertar
-             */
-
         public int InsertarSorteo (int idJuego, string hora)
         {
             try
@@ -502,6 +462,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
             }
         }
 
+        /**
+          * Método: InsertarSorteoItem
+          * ---------------------------------------------------------------------------
+          * Este metodo inserta un item de un sorteo en la tabla sorteoitem
+          * @param s: Contiene los datos necesarios para poder insertar el sorteo
+          * @return retorna el número de filas afectadas
+          */
         public int InsertarSorteoItem(int idItem, int idSorteo, int cupo, float monto)
         {
             try
@@ -529,6 +496,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
             }
         }
 
+        /**
+          * Método: InsertarSorteoDia
+          * ---------------------------------------------------------------------------
+          * Este metodo inserta un dia de un sorteo en la tabla sorteodia
+          * @param s: Contiene los datos necesarios para poder insertar el sorteo
+          * @return retorna número de filas afectadas
+          */
         public int InsertarSorteoDia(int idDia, int idSorteo)
         {
             try
@@ -562,11 +536,8 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
          * Este metodo realiza la eliminacion de un sorteo y cambia su status de la
          * base de datos
          * @param s: Contiene los datos necesarios para poder eliminar el sorteo
-         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
-         * un string el cual indica si se elimino exitosamente el sorteo o si no
-         * se pudo eliminar
+         * @return retorna el número de filas afectadas
          */
-
         public int EliminarSorteo(int idSorteo)
         {
             try
@@ -594,6 +565,14 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
             }
         }
 
+        /**
+         * Método: EliminarSorteo
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la eliminacion de los item de un sorteo y cambia su status de la
+         * base de datos
+         * @param s: Contiene los datos necesarios para poder eliminar los item del sorteo
+         * @return retorna el número de filas afectadas
+         */
         public int EliminarSorteoItem(int idSorteo)
         {
             try
@@ -620,7 +599,15 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
                 Desconectar();
             }
         }
-
+        
+        /**
+         * Método: EliminarSorteo
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la eliminacion de los dias de un sorteo y cambia su status de la
+         * base de datos
+         * @param s: Contiene los datos necesarios para poder eliminar los dias del sorteo
+         * @return retorna el número de filas afectadas
+         */
         public int EliminarSorteoDia(int idSorteo)
         {
             try
@@ -654,11 +641,8 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
          * Este metodo realiza la modificacion de un sorteo y cambia sus datos de la
          * base de datos
          * @param s: Contiene los datos necesarios para poder modificar el sorteo
-         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
-         * un string el cual indica si se modifico exitosamente el sorteo o si no
-         * se pudo modificar
+         * @return retorna el número de filas afectadas
          */
-
         public int ModificarSorteo(int idSorteo, int idJuego, string hora)
         {
             try
@@ -687,16 +671,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
         }
 
         /**
-         * Método: ConsultarSorteoxJuego
+         * Método: ConsultarSorteosdeJuego
          * ---------------------------------------------------------------------------
          * Este metodo realiza la busqueda de todos los sorteos de un juego en la 
          * base de datos
          * @param s: Contiene los datos necesarios para poder buscar los sorteos
-         * @return retorna un tipo de dato llamado Respuesta el cual contiene 
-         * un string el cual indica los datos de los sorteos o si hubo un error 
-         * o no se encontro el juego
+         * @return retorna una lista con los id de los sorteos
          */
-
         public List<int> ConsultarSorteosdeJuego(int idJuego)
         {
             try
@@ -730,6 +711,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
             }
         }
 
+        /**
+         * Método: ConsultarSorteoxJuego
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la busqueda de un sorteo
+         * @param s: Contiene los datos necesarios para poder buscar el sorteo
+         * @return retorna un string con todos los datos del sorteo
+         */
         public string ConsultarSorteoxJuego(int idSorteo)
         {
             try
@@ -765,6 +753,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
 
         }
 
+        /**
+         * Método: ConsultarSorteoItemxJuego
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la busqueda de los item de un sorteo
+         * @param s: Contiene los datos necesarios para poder buscar los item del sorteo
+         * @return retorna un string con todos los datos de los item del sorteo
+         */
         public string ConsultarSorteoItemxJuego(int idSorteo)
         {
             try
@@ -802,6 +797,13 @@ namespace ServicioLotoUCAB.Servicio.AccesoDatos.Dao
 
         }
 
+        /**
+         * Método: ConsultarSorteoDiaxJuego
+         * ---------------------------------------------------------------------------
+         * Este metodo realiza la busqueda de los item de un sorteo
+         * @param s: Contiene los datos necesarios para poder buscar los días del sorteo
+         * @return retorna un string con todos los datos de los días del sorteo
+         */
         public string ConsultarSorteoDiaxJuego(int idSorteo)
         {
             try

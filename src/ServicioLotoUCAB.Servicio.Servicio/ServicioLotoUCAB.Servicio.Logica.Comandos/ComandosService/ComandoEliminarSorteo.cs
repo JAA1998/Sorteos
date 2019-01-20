@@ -25,7 +25,10 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
         {
             try
             {
-                if (s.id_sorteo == 0)
+                /**
+                 * Comprueba los parámetros
+                 */
+                if (s == null || s.id_sorteo == null)
                 {
                     throw new ParameterException("ID_SORTEO");
                 }
@@ -33,6 +36,9 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                 int result;
                 DaoSorteos dao = FabricaDao.FabricarDaoSorteos();
 
+                /**
+                 * Comprueba que el sorteo este registrado en la base de datos
+                 */
                 result = dao.ConsultarSorteo(s.id_sorteo);
 
                 if (result != 1)
@@ -40,13 +46,19 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     throw new ConsultarException("El sorteo " + s.id_sorteo + " no se encuentra registrado en el sistema");
                 }
 
+                /**
+                 * Comprueba que no haya apuestas asociadas al sorteo
+                 */
                 result = dao.ConsultarApuestas(s.id_sorteo);
 
                 if (result == 1)
                 {
                     throw new ConsultarException("El sorteo que intenta eliminar tiene apuestas activas asociadas");
                 }
-                
+
+                /**
+                 * Realiza la eliminación del sorteo
+                 */
                 TransactionOptions transactionOptions = new TransactionOptions();
                 transactionOptions.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
                 using (TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required, transactionOptions))
@@ -56,6 +68,10 @@ namespace ServicioLotoUCAB.Servicio.Logica.Comandos.ComandosService
                     result = dao.EliminarSorteoDia(s.id_sorteo);
                     transaction.Complete();
                 }
+
+                /**
+                 * Devuelve la respuesta
+                 */
                 if (result > 0)
                 {
                     return new Respuesta("Eliminado exitosamente");

@@ -10,7 +10,7 @@ namespace ServicioLotoUCAB.Servicio.Excepciones
     {
 
         public DBException()
-            : base("Error con la conexión")
+            : base("Error con la base de datos")
         { }
 
     }

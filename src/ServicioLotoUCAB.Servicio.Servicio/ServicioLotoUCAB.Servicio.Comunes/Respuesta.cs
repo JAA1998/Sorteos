@@ -11,11 +11,28 @@ namespace ServicioLotoUCAB.Servicio.Comunes
     public class Respuesta
     {
         [DataMember]
+        public Object Objeto { get; set; }
+
+        [DataMember]
         public string Mensaje { get; set; }
 
-        public Respuesta (string msg)
+        //CONSTRUCTOR PARA ERRORES
+        public Respuesta (string m)
         {
-            this.Mensaje = msg;
+            this.Mensaje = m;
+        }
+
+        //CONSTRUCTOR PARA OBJETOS
+        public Respuesta(Object o)
+        {
+            this.Objeto = o;
+        }
+
+        //OTRO CONSTRUCTOR
+        public Respuesta(Object o, String m)
+        {
+            this.Objeto = o;
+            this.Mensaje = m;
         }
     }
 }
